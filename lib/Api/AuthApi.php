@@ -124,11 +124,12 @@ class AuthApi
      * @throws \InvalidArgumentException
      * @return string
      */
-    public function login($body = null)
+    public function login($body = null, $merchantId)
     {
         list($response) = $this->loginWithHttpInfo($body);
         $parsed = json_decode($response);
         $this->config->setAccessToken($parsed->data->accessToken);
+        $this->config->setMerchantId($merchantId);
         return $response;
     }
 

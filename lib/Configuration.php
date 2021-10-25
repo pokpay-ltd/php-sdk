@@ -65,6 +65,13 @@ class Configuration
     protected $accessToken = '';
 
     /**
+     * Id of the logged in merchant
+     * 
+     * @var string
+     */
+    protected $merchantId = '';
+
+    /**
      * Username for HTTP basic authentication
      *
      * @var string
@@ -194,6 +201,29 @@ class Configuration
     public function getAccessToken()
     {
         return $this->accessToken;
+    }
+
+    /**
+     * Sets merchantId
+     *
+     * @param string $merchantId merchant Id
+     *
+     * @return $this
+     */
+    public function setMerchantId($merchantId)
+    {
+        $this->merchantId = $merchantId;
+        return $this;
+    }
+
+    /**
+     * Gets merchantId
+     *
+     * @return string merchantId
+     */
+    public function getMerchantId()
+    {
+        return $this->merchantId;
     }
 
     /**
