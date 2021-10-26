@@ -125,9 +125,9 @@ class MerchantsApi
      * @throws \InvalidArgumentException
      * @return string
      */
-    public function captureOrder($merchant_id, $sdk_order_id)
+    public function captureOrder($sdk_order_id)
     {
-        list($response) = $this->captureOrderWithHttpInfo($merchant_id, $sdk_order_id);
+        list($response) = $this->captureOrderWithHttpInfo($this->config->getMerchantId(), $sdk_order_id);
         return $response;
     }
 
@@ -411,9 +411,9 @@ class MerchantsApi
      * @throws \InvalidArgumentException
      * @return string
      */
-    public function createOrder($merchant_id, $body = null)
+    public function createOrder($body = null)
     {
-        list($response) = $this->createOrderWithHttpInfo($merchant_id, $body);
+        list($response) = $this->createOrderWithHttpInfo($this->config->getMerchantId(), $body);
         return $response;
     }
 
