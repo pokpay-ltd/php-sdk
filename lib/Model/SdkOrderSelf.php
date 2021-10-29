@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSdkOrderProductsObject
+ * SdkOrderSelf
  *
  * PHP version 7.3
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * CreateSdkOrderProductsObject Class Doc Comment
+ * SdkOrderSelf Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -42,7 +42,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class CreateSdkOrderProductsObject implements ModelInterface, ArrayAccess, \JsonSerializable
+class SdkOrderSelf implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class CreateSdkOrderProductsObject implements ModelInterface, ArrayAccess, \Json
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CreateSdkOrderProductsObject';
+    protected static $openAPIModelName = 'SdkOrderSelf';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,9 +59,8 @@ class CreateSdkOrderProductsObject implements ModelInterface, ArrayAccess, \Json
       * @var string[]
       */
     protected static $openAPITypes = [
-        'name' => 'string',
-        'quantity' => 'float',
-        'price' => 'float'
+        'confirmUrl' => 'string',
+        'confirmDeeplink' => 'string'
     ];
 
     /**
@@ -72,9 +71,8 @@ class CreateSdkOrderProductsObject implements ModelInterface, ArrayAccess, \Json
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'name' => null,
-        'quantity' => null,
-        'price' => null
+        'confirmUrl' => null,
+        'confirmDeeplink' => null
     ];
 
     /**
@@ -104,9 +102,8 @@ class CreateSdkOrderProductsObject implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'name',
-        'quantity' => 'quantity',
-        'price' => 'price'
+        'confirmUrl' => 'confirmUrl',
+        'confirmDeeplink' => 'confirmDeeplink'
     ];
 
     /**
@@ -115,9 +112,8 @@ class CreateSdkOrderProductsObject implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'quantity' => 'setQuantity',
-        'price' => 'setPrice'
+        'confirmUrl' => 'setConfirmUrl',
+        'confirmDeeplink' => 'setConfirmDeeplink'
     ];
 
     /**
@@ -126,9 +122,8 @@ class CreateSdkOrderProductsObject implements ModelInterface, ArrayAccess, \Json
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'quantity' => 'getQuantity',
-        'price' => 'getPrice'
+        'confirmUrl' => 'getConfirmUrl',
+        'confirmDeeplink' => 'getConfirmDeeplink'
     ];
 
     /**
@@ -188,9 +183,8 @@ class CreateSdkOrderProductsObject implements ModelInterface, ArrayAccess, \Json
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = $data['name'] ?? null;
-        $this->container['quantity'] = $data['quantity'] ?? null;
-        $this->container['price'] = $data['price'] ?? null;
+        $this->container['confirmUrl'] = $data['confirmUrl'] ?? null;
+        $this->container['confirmDeeplink'] = $data['confirmDeeplink'] ?? null;
     }
 
     /**
@@ -202,15 +196,6 @@ class CreateSdkOrderProductsObject implements ModelInterface, ArrayAccess, \Json
     {
         $invalidProperties = [];
 
-        if ($this->container['name'] === null) {
-            $invalidProperties[] = "'name' can't be null";
-        }
-        if ($this->container['quantity'] === null) {
-            $invalidProperties[] = "'quantity' can't be null";
-        }
-        if ($this->container['price'] === null) {
-            $invalidProperties[] = "'price' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -227,73 +212,49 @@ class CreateSdkOrderProductsObject implements ModelInterface, ArrayAccess, \Json
 
 
     /**
-     * Gets name
+     * Gets confirmUrl
      *
-     * @return string
+     * @return string|null
      */
-    public function getName()
+    public function getConfirmUrl()
     {
-        return $this->container['name'];
+        return $this->container['confirmUrl'];
     }
 
     /**
-     * Sets name
+     * Sets confirmUrl
      *
-     * @param string $name name
+     * @param string|null $confirmUrl confirmUrl
      *
      * @return self
      */
-    public function setName($name)
+    public function setConfirmUrl($confirmUrl)
     {
-        $this->container['name'] = $name;
+        $this->container['confirmUrl'] = $confirmUrl;
 
         return $this;
     }
 
     /**
-     * Gets quantity
+     * Gets confirmDeeplink
      *
-     * @return float
+     * @return string|null
      */
-    public function getQuantity()
+    public function getConfirmDeeplink()
     {
-        return $this->container['quantity'];
+        return $this->container['confirmDeeplink'];
     }
 
     /**
-     * Sets quantity
+     * Sets confirmDeeplink
      *
-     * @param float $quantity quantity
+     * @param string|null $confirmDeeplink confirmDeeplink
      *
      * @return self
      */
-    public function setQuantity($quantity)
+    public function setConfirmDeeplink($confirmDeeplink)
     {
-        $this->container['quantity'] = $quantity;
-
-        return $this;
-    }
-
-    /**
-     * Gets price
-     *
-     * @return float
-     */
-    public function getPrice()
-    {
-        return $this->container['price'];
-    }
-
-    /**
-     * Sets price
-     *
-     * @param float $price price
-     *
-     * @return self
-     */
-    public function setPrice($price)
-    {
-        $this->container['price'] = $price;
+        $this->container['confirmDeeplink'] = $confirmDeeplink;
 
         return $this;
     }

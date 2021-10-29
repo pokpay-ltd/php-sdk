@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfirmSdkOrderPayload
+ * Merchant
  *
  * PHP version 7.3
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * ConfirmSdkOrderPayload Class Doc Comment
+ * Merchant Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -42,7 +42,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerializable
+class Merchant implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ConfirmSdkOrderPayload';
+    protected static $openAPIModelName = 'Merchant';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,9 +59,13 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'paymentMethod' => 'string',
-        'paymentMethodId' => 'string',
-        'billingInfoId' => 'string'
+        'id' => 'string',
+        'name' => 'string',
+        'address' => 'string',
+        'fieldOfOperation' => '\OpenAPI\Client\Model\FieldOfOperation[]',
+        'nuis' => 'string',
+        'verificationStatus' => 'string',
+        'isVerified' => 'bool'
     ];
 
     /**
@@ -72,9 +76,13 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'paymentMethod' => null,
-        'paymentMethodId' => null,
-        'billingInfoId' => null
+        'id' => null,
+        'name' => null,
+        'address' => null,
+        'fieldOfOperation' => null,
+        'nuis' => null,
+        'verificationStatus' => null,
+        'isVerified' => null
     ];
 
     /**
@@ -104,9 +112,13 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'paymentMethod' => 'paymentMethod',
-        'paymentMethodId' => 'paymentMethodId',
-        'billingInfoId' => 'billingInfoId'
+        'id' => 'id',
+        'name' => 'name',
+        'address' => 'address',
+        'fieldOfOperation' => 'fieldOfOperation',
+        'nuis' => 'nuis',
+        'verificationStatus' => 'verificationStatus',
+        'isVerified' => 'isVerified'
     ];
 
     /**
@@ -115,9 +127,13 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'paymentMethod' => 'setPaymentMethod',
-        'paymentMethodId' => 'setPaymentMethodId',
-        'billingInfoId' => 'setBillingInfoId'
+        'id' => 'setId',
+        'name' => 'setName',
+        'address' => 'setAddress',
+        'fieldOfOperation' => 'setFieldOfOperation',
+        'nuis' => 'setNuis',
+        'verificationStatus' => 'setVerificationStatus',
+        'isVerified' => 'setIsVerified'
     ];
 
     /**
@@ -126,9 +142,13 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'paymentMethod' => 'getPaymentMethod',
-        'paymentMethodId' => 'getPaymentMethodId',
-        'billingInfoId' => 'getBillingInfoId'
+        'id' => 'getId',
+        'name' => 'getName',
+        'address' => 'getAddress',
+        'fieldOfOperation' => 'getFieldOfOperation',
+        'nuis' => 'getNuis',
+        'verificationStatus' => 'getVerificationStatus',
+        'isVerified' => 'getIsVerified'
     ];
 
     /**
@@ -172,19 +192,23 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
         return self::$openAPIModelName;
     }
 
-    const PAYMENT_METHOD_RPAY_CREDIT = 'rpay-credit';
-    const PAYMENT_METHOD_CREDIT_DEBIT_CARD = 'credit-debit-card';
+    const VERIFICATION_STATUS_PENDING = 'pending';
+    const VERIFICATION_STATUS_REJECTED = 'rejected';
+    const VERIFICATION_STATUS_VERIFIED = 'verified';
+    const VERIFICATION_STATUS_UNVERIFIED = 'unverified';
 
     /**
      * Gets allowable values of the enum
      *
      * @return string[]
      */
-    public function getPaymentMethodAllowableValues()
+    public function getVerificationStatusAllowableValues()
     {
         return [
-            self::PAYMENT_METHOD_RPAY_CREDIT,
-            self::PAYMENT_METHOD_CREDIT_DEBIT_CARD,
+            self::VERIFICATION_STATUS_PENDING,
+            self::VERIFICATION_STATUS_REJECTED,
+            self::VERIFICATION_STATUS_VERIFIED,
+            self::VERIFICATION_STATUS_UNVERIFIED,
         ];
     }
 
@@ -201,11 +225,15 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data)
+    public function __construct(array $data = null)
     {
-        $this->container['paymentMethod'] = $data['paymentMethod'] ?? null;
-        $this->container['paymentMethodId'] = $data['paymentMethodId'] ?? null;
-        $this->container['billingInfoId'] = $data['billingInfoId'] ?? null;
+        $this->container['id'] = $data['id'] ?? null;
+        $this->container['name'] = $data['name'] ?? null;
+        $this->container['address'] = $data['address'] ?? null;
+        $this->container['fieldOfOperation'] = $data['fieldOfOperation'] ?? null;
+        $this->container['nuis'] = $data['nuis'] ?? null;
+        $this->container['verificationStatus'] = $data['verificationStatus'] ?? null;
+        $this->container['isVerified'] = $data['isVerified'] ?? null;
     }
 
     /**
@@ -217,24 +245,30 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
-        if ($this->container['paymentMethod'] === null) {
-            $invalidProperties[] = "'paymentMethod' can't be null";
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
         }
-        $allowedValues = $this->getPaymentMethodAllowableValues();
-        if (!is_null($this->container['paymentMethod']) && !in_array($this->container['paymentMethod'], $allowedValues, true)) {
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
+        }
+        if ($this->container['address'] === null) {
+            $invalidProperties[] = "'address' can't be null";
+        }
+        if ($this->container['nuis'] === null) {
+            $invalidProperties[] = "'nuis' can't be null";
+        }
+        if ($this->container['verificationStatus'] === null) {
+            $invalidProperties[] = "'verificationStatus' can't be null";
+        }
+        $allowedValues = $this->getVerificationStatusAllowableValues();
+        if (!is_null($this->container['verificationStatus']) && !in_array($this->container['verificationStatus'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'paymentMethod', must be one of '%s'",
-                $this->container['paymentMethod'],
+                "invalid value '%s' for 'verificationStatus', must be one of '%s'",
+                $this->container['verificationStatus'],
                 implode("', '", $allowedValues)
             );
         }
 
-        if ($this->container['paymentMethodId'] === null) {
-            $invalidProperties[] = "'paymentMethodId' can't be null";
-        }
-        if ($this->container['billingInfoId'] === null) {
-            $invalidProperties[] = "'billingInfoId' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -251,83 +285,179 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets paymentMethod
+     * Gets id
      *
      * @return string
      */
-    public function getPaymentMethod()
+    public function getId()
     {
-        return $this->container['paymentMethod'];
+        return $this->container['id'];
     }
 
     /**
-     * Sets paymentMethod
+     * Sets id
      *
-     * @param string $paymentMethod paymentMethod
+     * @param string $id id
      *
      * @return self
      */
-    public function setPaymentMethod($paymentMethod)
+    public function setId($id)
     {
-        $allowedValues = $this->getPaymentMethodAllowableValues();
-        if (!in_array($paymentMethod, $allowedValues, true)) {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string $name name
+     *
+     * @return self
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->container['address'];
+    }
+
+    /**
+     * Sets address
+     *
+     * @param string $address address
+     *
+     * @return self
+     */
+    public function setAddress($address)
+    {
+        $this->container['address'] = $address;
+
+        return $this;
+    }
+
+    /**
+     * Gets fieldOfOperation
+     *
+     * @return \OpenAPI\Client\Model\FieldOfOperation[]|null
+     */
+    public function getFieldOfOperation()
+    {
+        return $this->container['fieldOfOperation'];
+    }
+
+    /**
+     * Sets fieldOfOperation
+     *
+     * @param \OpenAPI\Client\Model\FieldOfOperation[]|null $fieldOfOperation fieldOfOperation
+     *
+     * @return self
+     */
+    public function setFieldOfOperation($fieldOfOperation)
+    {
+        $this->container['fieldOfOperation'] = $fieldOfOperation;
+
+        return $this;
+    }
+
+    /**
+     * Gets nuis
+     *
+     * @return string
+     */
+    public function getNuis()
+    {
+        return $this->container['nuis'];
+    }
+
+    /**
+     * Sets nuis
+     *
+     * @param string $nuis nuis
+     *
+     * @return self
+     */
+    public function setNuis($nuis)
+    {
+        $this->container['nuis'] = $nuis;
+
+        return $this;
+    }
+
+    /**
+     * Gets verificationStatus
+     *
+     * @return string
+     */
+    public function getVerificationStatus()
+    {
+        return $this->container['verificationStatus'];
+    }
+
+    /**
+     * Sets verificationStatus
+     *
+     * @param string $verificationStatus verificationStatus
+     *
+     * @return self
+     */
+    public function setVerificationStatus($verificationStatus)
+    {
+        $allowedValues = $this->getVerificationStatusAllowableValues();
+        if (!in_array($verificationStatus, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value '%s' for 'paymentMethod', must be one of '%s'",
-                    $paymentMethod,
+                    "Invalid value '%s' for 'verificationStatus', must be one of '%s'",
+                    $verificationStatus,
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['paymentMethod'] = $paymentMethod;
+        $this->container['verificationStatus'] = $verificationStatus;
 
         return $this;
     }
 
     /**
-     * Gets paymentMethodId
+     * Gets isVerified
      *
-     * @return string
+     * @return bool|null
      */
-    public function getPaymentMethodId()
+    public function getIsVerified()
     {
-        return $this->container['paymentMethodId'];
+        return $this->container['isVerified'];
     }
 
     /**
-     * Sets paymentMethodId
+     * Sets isVerified
      *
-     * @param string $paymentMethodId paymentMethodId
+     * @param bool|null $isVerified isVerified
      *
      * @return self
      */
-    public function setPaymentMethodId($paymentMethodId)
+    public function setIsVerified($isVerified)
     {
-        $this->container['paymentMethodId'] = $paymentMethodId;
-
-        return $this;
-    }
-
-    /**
-     * Gets billingInfoId
-     *
-     * @return string
-     */
-    public function getBillingInfoId()
-    {
-        return $this->container['billingInfoId'];
-    }
-
-    /**
-     * Sets billingInfoId
-     *
-     * @param string $billingInfoId billingInfoId
-     *
-     * @return self
-     */
-    public function setBillingInfoId($billingInfoId)
-    {
-        $this->container['billingInfoId'] = $billingInfoId;
+        $this->container['isVerified'] = $isVerified;
 
         return $this;
     }

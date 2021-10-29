@@ -1,6 +1,7 @@
 # OpenAPI\Client\MerchantsApi
 
-All URIs are relative to http://0.0.0.0:3000.
+All URIs are relative to *https://api.pokpay.io* in the production environment and *https://api-staging.pokpay.io* in the staging environment.
+All URIs use authorization, so AuthApi->login must be completed successfully firstly.
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -11,7 +12,7 @@ Method | HTTP request | Description
 ## `captureOrder()`
 
 ```php
-captureOrder($merchant_id, $sdk_order_id): string
+captureOrder($merchantId, $sdkOrderId): \OpenAPI\Client\Model\SdkOrderResponse
 ```
 
 Capture an sdk order
@@ -22,18 +23,22 @@ Capture an sdk order
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration();
 
+$merchantId = 'YOUR_POKPAY_MERCHANT_ID';
 
 $apiInstance = new OpenAPI\Client\Api\MerchantsApi(
+    $merchantId,
+    $config,
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
 );
-$merchant_id = 'merchant_id_example'; // string
-$sdk_order_id = 'sdk_order_id_example'; // string
+
+$sdkOrderId = 'sdkOrderId_example'; // string
 
 try {
-    $result = $apiInstance->captureOrder($merchant_id, $sdk_order_id);
+    $result = $apiInstance->captureOrder($sdkOrderId);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling MerchantsApi->captureOrder: ', $e->getMessage(), PHP_EOL;
@@ -44,16 +49,16 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **merchant_id** | **string**|  |
- **sdk_order_id** | **string**|  |
+ **merchantId** | **string**|  |
+ **sdkOrderId** | **string**|  |
 
 ### Return type
 
-**string**
+[**\OpenAPI\Client\Model\SdkOrderResponse**](../Model/SdkOrderResponse.md)
 
 ### Authorization
 
-No authorization required
+[jwt](../../README.md#jwt)
 
 ### HTTP request headers
 
@@ -67,7 +72,7 @@ No authorization required
 ## `createOrder()`
 
 ```php
-createOrder($merchant_id, $body): string
+createOrder($merchantId, $body): \OpenAPI\Client\Model\SdkOrderResponse
 ```
 
 Create an sdk api order
@@ -78,18 +83,28 @@ Create an sdk api order
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration();
 
+$merchantId = 'YOUR_POKPAY_MERCHANT_ID';
 
 $apiInstance = new OpenAPI\Client\Api\MerchantsApi(
+    $merchantId,
+    $config,
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
 );
-$merchant_id = 'merchant_id_example'; // string
-$body = new \OpenAPI\Client\Model\CreateSdkOrderPayload(); // \OpenAPI\Client\Model\CreateSdkOrderPayload
+
+$sdkOrderInfo = [
+    'amount' => 100,
+    'currencyCode' => 'EUR',
+    'products' => [],
+];
+
+$body = new \OpenAPI\Client\Model\CreateSdkOrderPayload($sdkOrderInfo); // \OpenAPI\Client\Model\CreateSdkOrderPayload
 
 try {
-    $result = $apiInstance->createOrder($merchant_id, $body);
+    $result = $apiInstance->createOrder($body);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling MerchantsApi->createOrder: ', $e->getMessage(), PHP_EOL;
@@ -100,16 +115,16 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **merchant_id** | **string**|  |
+ **merchantId** | **string**|  |
  **body** | [**\OpenAPI\Client\Model\CreateSdkOrderPayload**](../Model/CreateSdkOrderPayload.md)|  | [optional]
 
 ### Return type
 
-**string**
+[**\OpenAPI\Client\Model\SdkOrderResponse**](../Model/SdkOrderResponse.md)
 
 ### Authorization
 
-No authorization required
+[jwt](../../README.md#jwt)
 
 ### HTTP request headers
 

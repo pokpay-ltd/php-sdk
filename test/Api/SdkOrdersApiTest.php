@@ -84,24 +84,24 @@ class SdkOrdersApiTest extends TestCase
     }
 
     /**
-     * Test case for getOrderById
+     * Test case for confirmOrderAsGuest
      *
-     * Retrieve an order.
+     * Confirm order with guest checkout.
      *
      */
-    public function testGetOrderById()
+    public function testConfirmOrderAsGuest()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test case for guestConfirmOrder
+     * Test case for getSdkOrderById
      *
-     * Confirm order with guest checkout.
+     * Retrieve an order.
      *
      */
-    public function testGuestConfirmOrder()
+    public function testGetSdkOrderById()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

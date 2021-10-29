@@ -69,18 +69,19 @@ class AuthApi
     protected $hostIndex;
 
     /**
+     * @param Configuration $config configuration
      * @param ClientInterface $client
-     * @param Configuration   $config
      * @param HeaderSelector  $selector
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
+        Configuration $config,
         ClientInterface $client = null,
         HeaderSelector $selector = null,
         $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
-        $this->config = Configuration::getDefaultConfiguration();
+        $this->config = $config;
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
     }
@@ -118,18 +119,16 @@ class AuthApi
      *
      * Login Sdk
      *
-     * @param  \OpenAPI\Client\Model\LoginSdk $body body (optional)
+     * @param  \OpenAPI\Client\Model\LoginSdkPayload $body body
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return string
+     * @return \OpenAPI\Client\Model\LoginResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
-    public function login($body = null, $merchantId)
+    public function login($body)
     {
         list($response) = $this->loginWithHttpInfo($body);
-        $parsed = json_decode($response);
-        $this->config->setAccessToken($parsed->data->accessToken);
-        $this->config->setMerchantId($merchantId);
+        $this->config->setApiKey('Authorization', $response->getData()->getAccessToken());
         return $response;
     }
 
@@ -138,11 +137,11 @@ class AuthApi
      *
      * Login Sdk
      *
-     * @param  \OpenAPI\Client\Model\LoginSdk $body (optional)
+     * @param  \OpenAPI\Client\Model\LoginSdkPayload $body (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of string, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\LoginResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function loginWithHttpInfo($body = null)
     {
@@ -177,21 +176,45 @@ class AuthApi
             }
 
             switch($statusCode) {
-                default:
-                    if ('string' === '\SplFileObject') {
+                case 200:
+                    if ('\OpenAPI\Client\Model\LoginResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'string', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\LoginResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 400:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 403:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'string';
+            $returnType = '\OpenAPI\Client\Model\LoginResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -206,10 +229,26 @@ class AuthApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                default:
+                case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'string',
+                        '\OpenAPI\Client\Model\LoginResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 400:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 403:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -224,7 +263,7 @@ class AuthApi
      *
      * Login Sdk
      *
-     * @param  \OpenAPI\Client\Model\LoginSdk $body (optional)
+     * @param  \OpenAPI\Client\Model\LoginSdkPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -244,14 +283,14 @@ class AuthApi
      *
      * Login Sdk
      *
-     * @param  \OpenAPI\Client\Model\LoginSdk $body (optional)
+     * @param  \OpenAPI\Client\Model\LoginSdkPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function loginAsyncWithHttpInfo($body = null)
     {
-        $returnType = 'string';
+        $returnType = '\OpenAPI\Client\Model\LoginResponse';
         $request = $this->loginRequest($body);
 
         return $this->client
@@ -290,7 +329,7 @@ class AuthApi
     /**
      * Create request for operation 'login'
      *
-     * @param  \OpenAPI\Client\Model\LoginSdk $body (optional)
+     * @param  \OpenAPI\Client\Model\LoginSdkPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request

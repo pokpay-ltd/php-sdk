@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfirmSdkOrderGuestPayloadTest
+ * SdkOrderResponseDataTest
  *
  * PHP version 7.3
  *
@@ -31,15 +31,15 @@ namespace OpenAPI\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ConfirmSdkOrderGuestPayloadTest Class Doc Comment
+ * SdkOrderResponseDataTest Class Doc Comment
  *
  * @category    Class
- * @description ConfirmSdkOrderGuestPayload
+ * @description SdkOrderResponseData
  * @package     OpenAPI\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class ConfirmSdkOrderGuestPayloadTest extends TestCase
+class SdkOrderResponseDataTest extends TestCase
 {
 
     /**
@@ -71,18 +71,18 @@ class ConfirmSdkOrderGuestPayloadTest extends TestCase
     }
 
     /**
-     * Test "ConfirmSdkOrderGuestPayload"
+     * Test "SdkOrderResponseData"
      */
-    public function testConfirmSdkOrderGuestPayload()
+    public function testSdkOrderResponseData()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "creditCardId"
+     * Test attribute "sdkOrder"
      */
-    public function testPropertyCreditCardId()
+    public function testPropertySdkOrder()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

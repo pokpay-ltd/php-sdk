@@ -65,13 +65,6 @@ class Configuration
     protected $accessToken = '';
 
     /**
-     * Id of the logged in merchant
-     * 
-     * @var string
-     */
-    protected $merchantId = '';
-
-    /**
      * Username for HTTP basic authentication
      *
      * @var string
@@ -86,11 +79,19 @@ class Configuration
     protected $password = '';
 
     /**
+     * Production and staging urls
+     *
+     * @var string
+     */
+    protected $stagingUrl = 'https://api-staging.pokpay.io';
+    protected $productionUrl = 'https://api.pokpay.io';
+
+    /**
      * The host
      *
      * @var string
      */
-    protected $host = 'http://0.0.0.0:3000';
+    protected $host = '';
 
     /**
      * User agent of the HTTP request, set to "OpenAPI-Generator/{version}/PHP" by default
@@ -122,10 +123,20 @@ class Configuration
 
     /**
      * Constructor
+     *
+     * @param boolean $isProduction Choose between production and staging environments
      */
-    public function __construct()
+    public function __construct($isProduction = false)
     {
+        $this->host = $isProduction ? $this->productionUrl : $this->stagingUrl;
         $this->tempFolderPath = sys_get_temp_dir();
+    }
+
+    /**
+     * Use production environment
+     */
+    public function useProduction() {
+
     }
 
     /**
@@ -201,29 +212,6 @@ class Configuration
     public function getAccessToken()
     {
         return $this->accessToken;
-    }
-
-    /**
-     * Sets merchantId
-     *
-     * @param string $merchantId merchant Id
-     *
-     * @return $this
-     */
-    public function setMerchantId($merchantId)
-    {
-        $this->merchantId = $merchantId;
-        return $this;
-    }
-
-    /**
-     * Gets merchantId
-     *
-     * @return string merchantId
-     */
-    public function getMerchantId()
-    {
-        return $this->merchantId;
     }
 
     /**
@@ -395,12 +383,14 @@ class Configuration
     /**
      * Gets the default configuration instance
      *
+     * @param boolean $isProduction Choose between production and staging environments
+     *
      * @return Configuration
      */
-    public static function getDefaultConfiguration()
+    public static function getDefaultConfiguration($isProduction = false)
     {
         if (self::$defaultConfiguration === null) {
-            self::$defaultConfiguration = new Configuration();
+            self::$defaultConfiguration = new Configuration($isProduction);
         }
 
         return self::$defaultConfiguration;
@@ -468,7 +458,7 @@ class Configuration
     {
         return [
             [
-                "url" => "http://0.0.0.0:3000",
+                "url" => $this->host,
                 "description" => "No description provided",
             ]
         ];

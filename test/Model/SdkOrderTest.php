@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSdkOrderPayloadTest
+ * SdkOrderTest
  *
  * PHP version 7.3
  *
@@ -31,15 +31,15 @@ namespace OpenAPI\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * CreateSdkOrderPayloadTest Class Doc Comment
+ * SdkOrderTest Class Doc Comment
  *
  * @category    Class
- * @description CreateSdkOrderPayload
+ * @description SdkOrder
  * @package     OpenAPI\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CreateSdkOrderPayloadTest extends TestCase
+class SdkOrderTest extends TestCase
 {
 
     /**
@@ -71,9 +71,18 @@ class CreateSdkOrderPayloadTest extends TestCase
     }
 
     /**
-     * Test "CreateSdkOrderPayload"
+     * Test "SdkOrder"
      */
-    public function testCreateSdkOrderPayload()
+    public function testSdkOrder()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "id"
+     */
+    public function testPropertyId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -98,15 +107,6 @@ class CreateSdkOrderPayloadTest extends TestCase
     }
 
     /**
-     * Test attribute "autoCapture"
-     */
-    public function testPropertyAutoCapture()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
      * Test attribute "products"
      */
     public function testPropertyProducts()
@@ -125,9 +125,27 @@ class CreateSdkOrderPayloadTest extends TestCase
     }
 
     /**
-     * Test attribute "webhookUrl"
+     * Test attribute "finalAmount"
      */
-    public function testPropertyWebhookUrl()
+    public function testPropertyFinalAmount()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "createdAt"
+     */
+    public function testPropertyCreatedAt()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "expiresAt"
+     */
+    public function testPropertyExpiresAt()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
@@ -143,9 +161,18 @@ class CreateSdkOrderPayloadTest extends TestCase
     }
 
     /**
-     * Test attribute "deeplink"
+     * Test attribute "merchant"
      */
-    public function testPropertyDeeplink()
+    public function testPropertyMerchant()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "self"
+     */
+    public function testPropertySelf()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -1,18 +1,18 @@
 # OpenAPI\Client\SdkOrdersApi
 
-All URIs are relative to http://0.0.0.0:3000.
+All URIs are relative to *https://api.pokpay.io* in the production environment and *https://api-staging.pokpay.io* in the staging environment.
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**confirmOrder()**](SdkOrdersApi.md#confirmOrder) | **POST** /sdk-orders/{sdkOrderId}/confirm | Confirm order.
-[**getOrderById()**](SdkOrdersApi.md#getOrderById) | **GET** /sdk-orders/{sdkOrderId} | Retrieve an order
-[**guestConfirmOrder()**](SdkOrdersApi.md#guestConfirmOrder) | **POST** /sdk-orders/{sdkOrderId}/guest-confirm | Confirm order with guest checkout
+[**confirmOrderAsGuest()**](SdkOrdersApi.md#confirmOrderAsGuest) | **POST** /sdk-orders/{sdkOrderId}/guest-confirm | Confirm order with guest checkout
+[**getSdkOrderById()**](SdkOrdersApi.md#getSdkOrderById) | **GET** /sdk-orders/{sdkOrderId} | Retrieve an order
 
 
 ## `confirmOrder()`
 
 ```php
-confirmOrder($sdk_order_id, $body): string
+confirmOrder($sdkOrderId, $body): \OpenAPI\Client\Model\SdkOrderResponse
 ```
 
 Confirm order.
@@ -23,18 +23,18 @@ Confirm order.
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-
-
 $apiInstance = new OpenAPI\Client\Api\SdkOrdersApi(
+    $config,
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
 );
-$sdk_order_id = 'sdk_order_id_example'; // string
+
+$sdkOrderId = 'sdkOrderId_example'; // string
 $body = new \OpenAPI\Client\Model\ConfirmSdkOrderPayload(); // \OpenAPI\Client\Model\ConfirmSdkOrderPayload
 
 try {
-    $result = $apiInstance->confirmOrder($sdk_order_id, $body);
+    $result = $apiInstance->confirmOrder($sdkOrderId, $body);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling SdkOrdersApi->confirmOrder: ', $e->getMessage(), PHP_EOL;
@@ -45,16 +45,16 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sdk_order_id** | **string**|  |
+ **sdkOrderId** | **string**|  |
  **body** | [**\OpenAPI\Client\Model\ConfirmSdkOrderPayload**](../Model/ConfirmSdkOrderPayload.md)|  | [optional]
 
 ### Return type
 
-**string**
+[**\OpenAPI\Client\Model\SdkOrderResponse**](../Model/SdkOrderResponse.md)
 
 ### Authorization
 
-No authorization required
+[jwt](../../README.md#jwt)
 
 ### HTTP request headers
 
@@ -65,64 +65,10 @@ No authorization required
 [[Back to Model list]](../../README.md#models)
 [[Back to README]](../../README.md)
 
-## `getOrderById()`
+## `confirmOrderAsGuest()`
 
 ```php
-getOrderById($sdk_order_id): string
-```
-
-Retrieve an order
-
-### Example
-
-```php
-<?php
-require_once(__DIR__ . '/vendor/autoload.php');
-
-
-
-$apiInstance = new OpenAPI\Client\Api\SdkOrdersApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
-);
-$sdk_order_id = 'sdk_order_id_example'; // string
-
-try {
-    $result = $apiInstance->getOrderById($sdk_order_id);
-    print_r($result);
-} catch (Exception $e) {
-    echo 'Exception when calling SdkOrdersApi->getOrderById: ', $e->getMessage(), PHP_EOL;
-}
-```
-
-### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sdk_order_id** | **string**|  |
-
-### Return type
-
-**string**
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: `*/*`
-
-[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
-[[Back to Model list]](../../README.md#models)
-[[Back to README]](../../README.md)
-
-## `guestConfirmOrder()`
-
-```php
-guestConfirmOrder($sdk_order_id, $body): string
+confirmOrderAsGuest($sdkOrderId, $body): \OpenAPI\Client\Model\SdkOrderResponse
 ```
 
 Confirm order with guest checkout
@@ -133,21 +79,21 @@ Confirm order with guest checkout
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration();
 
 $apiInstance = new OpenAPI\Client\Api\SdkOrdersApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$sdk_order_id = 'sdk_order_id_example'; // string
+$sdkOrderId = 'sdkOrderId_example'; // string
 $body = new \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload(); // \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload
 
 try {
-    $result = $apiInstance->guestConfirmOrder($sdk_order_id, $body);
+    $result = $apiInstance->confirmOrderAsGuest($sdkOrderId, $body);
     print_r($result);
 } catch (Exception $e) {
-    echo 'Exception when calling SdkOrdersApi->guestConfirmOrder: ', $e->getMessage(), PHP_EOL;
+    echo 'Exception when calling SdkOrdersApi->confirmOrderAsGuest: ', $e->getMessage(), PHP_EOL;
 }
 ```
 
@@ -155,12 +101,67 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **sdk_order_id** | **string**|  |
+ **sdkOrderId** | **string**|  |
  **body** | [**\OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload**](../Model/ConfirmSdkOrderGuestPayload.md)|  | [optional]
 
 ### Return type
 
-**string**
+[**\OpenAPI\Client\Model\SdkOrderResponse**](../Model/SdkOrderResponse.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: `*/*`
+
+[[Back to top]](#) [[Back to API list]](../../README.md#endpoints)
+[[Back to Model list]](../../README.md#models)
+[[Back to README]](../../README.md)
+
+## `getSdkOrderById()`
+
+```php
+getSdkOrderById($sdkOrderId): \OpenAPI\Client\Model\SdkOrderResponse
+```
+
+Retrieve an order
+
+### Example
+
+```php
+<?php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration();
+
+$apiInstance = new OpenAPI\Client\Api\SdkOrdersApi(
+    $config,
+    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
+    // This is optional, `GuzzleHttp\Client` will be used as default.
+    new GuzzleHttp\Client(),
+);
+$sdkOrderId = 'sdkOrderId_example'; // string
+
+try {
+    $result = $apiInstance->getSdkOrderById($sdkOrderId);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling SdkOrdersApi->getSdkOrderById: ', $e->getMessage(), PHP_EOL;
+}
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **sdkOrderId** | **string**|  |
+
+### Return type
+
+[**\OpenAPI\Client\Model\SdkOrderResponse**](../Model/SdkOrderResponse.md)
 
 ### Authorization
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfirmSdkOrderPayload
+ * LoginSdkPayload
  *
  * PHP version 7.3
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * ConfirmSdkOrderPayload Class Doc Comment
+ * LoginSdkPayload Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -42,7 +42,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerializable
+class LoginSdkPayload implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ConfirmSdkOrderPayload';
+    protected static $openAPIModelName = 'LoginSdkPayload';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,9 +59,8 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'paymentMethod' => 'string',
-        'paymentMethodId' => 'string',
-        'billingInfoId' => 'string'
+        'keyId' => 'string',
+        'keySecret' => 'string'
     ];
 
     /**
@@ -72,9 +71,8 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'paymentMethod' => null,
-        'paymentMethodId' => null,
-        'billingInfoId' => null
+        'keyId' => null,
+        'keySecret' => null
     ];
 
     /**
@@ -104,9 +102,8 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'paymentMethod' => 'paymentMethod',
-        'paymentMethodId' => 'paymentMethodId',
-        'billingInfoId' => 'billingInfoId'
+        'keyId' => 'keyId',
+        'keySecret' => 'keySecret'
     ];
 
     /**
@@ -115,9 +112,8 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'paymentMethod' => 'setPaymentMethod',
-        'paymentMethodId' => 'setPaymentMethodId',
-        'billingInfoId' => 'setBillingInfoId'
+        'keyId' => 'setKeyId',
+        'keySecret' => 'setKeySecret'
     ];
 
     /**
@@ -126,9 +122,8 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'paymentMethod' => 'getPaymentMethod',
-        'paymentMethodId' => 'getPaymentMethodId',
-        'billingInfoId' => 'getBillingInfoId'
+        'keyId' => 'getKeyId',
+        'keySecret' => 'getKeySecret'
     ];
 
     /**
@@ -172,21 +167,6 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
         return self::$openAPIModelName;
     }
 
-    const PAYMENT_METHOD_RPAY_CREDIT = 'rpay-credit';
-    const PAYMENT_METHOD_CREDIT_DEBIT_CARD = 'credit-debit-card';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getPaymentMethodAllowableValues()
-    {
-        return [
-            self::PAYMENT_METHOD_RPAY_CREDIT,
-            self::PAYMENT_METHOD_CREDIT_DEBIT_CARD,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -198,14 +178,14 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
     /**
      * Constructor
      *
-     * @param mixed[] $data Associated array of property values
-     *                      initializing the model
+     * @param string $keyId keyId for the API calls
+     * @param string $keySecret keySecret for the API calls
+     *
      */
-    public function __construct(array $data)
+    public function __construct($keyId, $keySecret)
     {
-        $this->container['paymentMethod'] = $data['paymentMethod'] ?? null;
-        $this->container['paymentMethodId'] = $data['paymentMethodId'] ?? null;
-        $this->container['billingInfoId'] = $data['billingInfoId'] ?? null;
+        $this->container['keyId'] = $keyId;
+        $this->container['keySecret'] = $keySecret;
     }
 
     /**
@@ -217,23 +197,11 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
-        if ($this->container['paymentMethod'] === null) {
-            $invalidProperties[] = "'paymentMethod' can't be null";
+        if ($this->container['keyId'] === null) {
+            $invalidProperties[] = "'keyId' can't be null";
         }
-        $allowedValues = $this->getPaymentMethodAllowableValues();
-        if (!is_null($this->container['paymentMethod']) && !in_array($this->container['paymentMethod'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'paymentMethod', must be one of '%s'",
-                $this->container['paymentMethod'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['paymentMethodId'] === null) {
-            $invalidProperties[] = "'paymentMethodId' can't be null";
-        }
-        if ($this->container['billingInfoId'] === null) {
-            $invalidProperties[] = "'billingInfoId' can't be null";
+        if ($this->container['keySecret'] === null) {
+            $invalidProperties[] = "'keySecret' can't be null";
         }
         return $invalidProperties;
     }
@@ -251,83 +219,49 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets paymentMethod
+     * Gets keyId
      *
      * @return string
      */
-    public function getPaymentMethod()
+    public function getKeyId()
     {
-        return $this->container['paymentMethod'];
+        return $this->container['keyId'];
     }
 
     /**
-     * Sets paymentMethod
+     * Sets keyId
      *
-     * @param string $paymentMethod paymentMethod
+     * @param string $keyId keyId
      *
      * @return self
      */
-    public function setPaymentMethod($paymentMethod)
+    public function setKeyId($keyId)
     {
-        $allowedValues = $this->getPaymentMethodAllowableValues();
-        if (!in_array($paymentMethod, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'paymentMethod', must be one of '%s'",
-                    $paymentMethod,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['paymentMethod'] = $paymentMethod;
+        $this->container['keyId'] = $keyId;
 
         return $this;
     }
 
     /**
-     * Gets paymentMethodId
+     * Gets keySecret
      *
      * @return string
      */
-    public function getPaymentMethodId()
+    public function getKeySecret()
     {
-        return $this->container['paymentMethodId'];
+        return $this->container['keySecret'];
     }
 
     /**
-     * Sets paymentMethodId
+     * Sets keySecret
      *
-     * @param string $paymentMethodId paymentMethodId
+     * @param string $keySecret keySecret
      *
      * @return self
      */
-    public function setPaymentMethodId($paymentMethodId)
+    public function setKeySecret($keySecret)
     {
-        $this->container['paymentMethodId'] = $paymentMethodId;
-
-        return $this;
-    }
-
-    /**
-     * Gets billingInfoId
-     *
-     * @return string
-     */
-    public function getBillingInfoId()
-    {
-        return $this->container['billingInfoId'];
-    }
-
-    /**
-     * Sets billingInfoId
-     *
-     * @param string $billingInfoId billingInfoId
-     *
-     * @return self
-     */
-    public function setBillingInfoId($billingInfoId)
-    {
-        $this->container['billingInfoId'] = $billingInfoId;
+        $this->container['keySecret'] = $keySecret;
 
         return $this;
     }

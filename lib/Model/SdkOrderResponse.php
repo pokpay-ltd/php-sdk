@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfirmSdkOrderPayload
+ * SdkOrderResponse
  *
  * PHP version 7.3
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * ConfirmSdkOrderPayload Class Doc Comment
+ * SdkOrderResponse Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -42,7 +42,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerializable
+class SdkOrderResponse implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ConfirmSdkOrderPayload';
+    protected static $openAPIModelName = 'SdkOrderResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,9 +59,10 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'paymentMethod' => 'string',
-        'paymentMethodId' => 'string',
-        'billingInfoId' => 'string'
+        'statusCode' => 'float',
+        'serverStatusCode' => 'float',
+        'message' => 'string',
+        'data' => '\OpenAPI\Client\Model\SdkOrderResponseData'
     ];
 
     /**
@@ -72,9 +73,10 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'paymentMethod' => null,
-        'paymentMethodId' => null,
-        'billingInfoId' => null
+        'statusCode' => null,
+        'serverStatusCode' => null,
+        'message' => null,
+        'data' => null
     ];
 
     /**
@@ -104,9 +106,10 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'paymentMethod' => 'paymentMethod',
-        'paymentMethodId' => 'paymentMethodId',
-        'billingInfoId' => 'billingInfoId'
+        'statusCode' => 'statusCode',
+        'serverStatusCode' => 'serverStatusCode',
+        'message' => 'message',
+        'data' => 'data'
     ];
 
     /**
@@ -115,9 +118,10 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'paymentMethod' => 'setPaymentMethod',
-        'paymentMethodId' => 'setPaymentMethodId',
-        'billingInfoId' => 'setBillingInfoId'
+        'statusCode' => 'setStatusCode',
+        'serverStatusCode' => 'setServerStatusCode',
+        'message' => 'setMessage',
+        'data' => 'setData'
     ];
 
     /**
@@ -126,9 +130,10 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'paymentMethod' => 'getPaymentMethod',
-        'paymentMethodId' => 'getPaymentMethodId',
-        'billingInfoId' => 'getBillingInfoId'
+        'statusCode' => 'getStatusCode',
+        'serverStatusCode' => 'getServerStatusCode',
+        'message' => 'getMessage',
+        'data' => 'getData'
     ];
 
     /**
@@ -172,21 +177,6 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
         return self::$openAPIModelName;
     }
 
-    const PAYMENT_METHOD_RPAY_CREDIT = 'rpay-credit';
-    const PAYMENT_METHOD_CREDIT_DEBIT_CARD = 'credit-debit-card';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getPaymentMethodAllowableValues()
-    {
-        return [
-            self::PAYMENT_METHOD_RPAY_CREDIT,
-            self::PAYMENT_METHOD_CREDIT_DEBIT_CARD,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -201,11 +191,12 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data)
+    public function __construct(array $data = null)
     {
-        $this->container['paymentMethod'] = $data['paymentMethod'] ?? null;
-        $this->container['paymentMethodId'] = $data['paymentMethodId'] ?? null;
-        $this->container['billingInfoId'] = $data['billingInfoId'] ?? null;
+        $this->container['statusCode'] = $data['statusCode'] ?? null;
+        $this->container['serverStatusCode'] = $data['serverStatusCode'] ?? null;
+        $this->container['message'] = $data['message'] ?? null;
+        $this->container['data'] = $data['data'] ?? null;
     }
 
     /**
@@ -217,24 +208,6 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
-        if ($this->container['paymentMethod'] === null) {
-            $invalidProperties[] = "'paymentMethod' can't be null";
-        }
-        $allowedValues = $this->getPaymentMethodAllowableValues();
-        if (!is_null($this->container['paymentMethod']) && !in_array($this->container['paymentMethod'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'paymentMethod', must be one of '%s'",
-                $this->container['paymentMethod'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['paymentMethodId'] === null) {
-            $invalidProperties[] = "'paymentMethodId' can't be null";
-        }
-        if ($this->container['billingInfoId'] === null) {
-            $invalidProperties[] = "'billingInfoId' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -251,83 +224,97 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets paymentMethod
+     * Gets statusCode
      *
-     * @return string
+     * @return float|null
      */
-    public function getPaymentMethod()
+    public function getStatusCode()
     {
-        return $this->container['paymentMethod'];
+        return $this->container['statusCode'];
     }
 
     /**
-     * Sets paymentMethod
+     * Sets statusCode
      *
-     * @param string $paymentMethod paymentMethod
+     * @param float|null $statusCode statusCode
      *
      * @return self
      */
-    public function setPaymentMethod($paymentMethod)
+    public function setStatusCode($statusCode)
     {
-        $allowedValues = $this->getPaymentMethodAllowableValues();
-        if (!in_array($paymentMethod, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'paymentMethod', must be one of '%s'",
-                    $paymentMethod,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['paymentMethod'] = $paymentMethod;
+        $this->container['statusCode'] = $statusCode;
 
         return $this;
     }
 
     /**
-     * Gets paymentMethodId
+     * Gets serverStatusCode
      *
-     * @return string
+     * @return float|null
      */
-    public function getPaymentMethodId()
+    public function getServerStatusCode()
     {
-        return $this->container['paymentMethodId'];
+        return $this->container['serverStatusCode'];
     }
 
     /**
-     * Sets paymentMethodId
+     * Sets serverStatusCode
      *
-     * @param string $paymentMethodId paymentMethodId
+     * @param float|null $serverStatusCode serverStatusCode
      *
      * @return self
      */
-    public function setPaymentMethodId($paymentMethodId)
+    public function setServerStatusCode($serverStatusCode)
     {
-        $this->container['paymentMethodId'] = $paymentMethodId;
+        $this->container['serverStatusCode'] = $serverStatusCode;
 
         return $this;
     }
 
     /**
-     * Gets billingInfoId
+     * Gets message
      *
-     * @return string
+     * @return string|null
      */
-    public function getBillingInfoId()
+    public function getMessage()
     {
-        return $this->container['billingInfoId'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets billingInfoId
+     * Sets message
      *
-     * @param string $billingInfoId billingInfoId
+     * @param string|null $message message
      *
      * @return self
      */
-    public function setBillingInfoId($billingInfoId)
+    public function setMessage($message)
     {
-        $this->container['billingInfoId'] = $billingInfoId;
+        $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets data
+     *
+     * @return \OpenAPI\Client\Model\SdkOrderResponseData|null
+     */
+    public function getData()
+    {
+        return $this->container['data'];
+    }
+
+    /**
+     * Sets data
+     *
+     * @param \OpenAPI\Client\Model\SdkOrderResponseData|null $data data
+     *
+     * @return self
+     */
+    public function setData($data)
+    {
+        $this->container['data'] = $data;
 
         return $this;
     }

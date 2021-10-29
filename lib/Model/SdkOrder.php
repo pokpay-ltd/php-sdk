@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSdkOrderPayload
+ * SdkOrder
  *
  * PHP version 7.3
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * CreateSdkOrderPayload Class Doc Comment
+ * SdkOrder Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -42,7 +42,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerializable
+class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CreateSdkOrderPayload';
+    protected static $openAPIModelName = 'SdkOrder';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,14 +59,17 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
       * @var string[]
       */
     protected static $openAPITypes = [
-        'amount' => 'string',
+        'id' => 'string',
+        'amount' => 'float',
         'currencyCode' => 'string',
-        'autoCapture' => 'bool',
         'products' => '\OpenAPI\Client\Model\SdkOrderProduct[]',
         'shippingCost' => 'float',
-        'webhookUrl' => 'string',
+        'finalAmount' => 'float',
+        'createdAt' => '\DateTime',
+        'expiresAt' => '\DateTime',
         'redirectUrl' => 'string',
-        'deeplink' => 'string'
+        'merchant' => '\OpenAPI\Client\Model\Merchant',
+        'self' => '\OpenAPI\Client\Model\SdkOrderSelf'
     ];
 
     /**
@@ -77,14 +80,17 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'id' => null,
         'amount' => null,
         'currencyCode' => null,
-        'autoCapture' => null,
         'products' => null,
         'shippingCost' => null,
-        'webhookUrl' => null,
+        'finalAmount' => null,
+        'createdAt' => 'date',
+        'expiresAt' => 'date',
         'redirectUrl' => null,
-        'deeplink' => null
+        'merchant' => null,
+        'self' => null
     ];
 
     /**
@@ -114,14 +120,17 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $attributeMap = [
+        'id' => 'id',
         'amount' => 'amount',
         'currencyCode' => 'currencyCode',
-        'autoCapture' => 'autoCapture',
         'products' => 'products',
         'shippingCost' => 'shippingCost',
-        'webhookUrl' => 'webhookUrl',
+        'finalAmount' => 'finalAmount',
+        'createdAt' => 'createdAt',
+        'expiresAt' => 'expiresAt',
         'redirectUrl' => 'redirectUrl',
-        'deeplink' => 'deeplink'
+        'merchant' => 'merchant',
+        'self' => '_self'
     ];
 
     /**
@@ -130,14 +139,17 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $setters = [
+        'id' => 'setId',
         'amount' => 'setAmount',
         'currencyCode' => 'setCurrencyCode',
-        'autoCapture' => 'setAutoCapture',
         'products' => 'setProducts',
         'shippingCost' => 'setShippingCost',
-        'webhookUrl' => 'setWebhookUrl',
+        'finalAmount' => 'setFinalAmount',
+        'createdAt' => 'setCreatedAt',
+        'expiresAt' => 'setExpiresAt',
         'redirectUrl' => 'setRedirectUrl',
-        'deeplink' => 'setDeeplink'
+        'merchant' => 'setMerchant',
+        'self' => 'setSelf'
     ];
 
     /**
@@ -146,14 +158,17 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
      * @var string[]
      */
     protected static $getters = [
+        'id' => 'getId',
         'amount' => 'getAmount',
         'currencyCode' => 'getCurrencyCode',
-        'autoCapture' => 'getAutoCapture',
         'products' => 'getProducts',
         'shippingCost' => 'getShippingCost',
-        'webhookUrl' => 'getWebhookUrl',
+        'finalAmount' => 'getFinalAmount',
+        'createdAt' => 'getCreatedAt',
+        'expiresAt' => 'getExpiresAt',
         'redirectUrl' => 'getRedirectUrl',
-        'deeplink' => 'getDeeplink'
+        'merchant' => 'getMerchant',
+        'self' => 'getSelf'
     ];
 
     /**
@@ -211,16 +226,19 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data)
+    public function __construct(array $data = null)
     {
+        $this->container['id'] = $data['id'] ?? null;
         $this->container['amount'] = $data['amount'] ?? null;
         $this->container['currencyCode'] = $data['currencyCode'] ?? 'ALL';
-        $this->container['autoCapture'] = $data['autoCapture'] ?? null;
         $this->container['products'] = $data['products'] ?? null;
         $this->container['shippingCost'] = $data['shippingCost'] ?? null;
-        $this->container['webhookUrl'] = $data['webhookUrl'] ?? null;
+        $this->container['finalAmount'] = $data['finalAmount'] ?? null;
+        $this->container['createdAt'] = $data['createdAt'] ?? null;
+        $this->container['expiresAt'] = $data['expiresAt'] ?? null;
         $this->container['redirectUrl'] = $data['redirectUrl'] ?? null;
-        $this->container['deeplink'] = $data['deeplink'] ?? null;
+        $this->container['merchant'] = $data['merchant'] ?? null;
+        $this->container['self'] = $data['self'] ?? null;
     }
 
     /**
@@ -232,19 +250,28 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
         if ($this->container['amount'] === null) {
             $invalidProperties[] = "'amount' can't be null";
         }
         if ($this->container['currencyCode'] === null) {
             $invalidProperties[] = "'currencyCode' can't be null";
         }
-        if ($this->container['products'] === null) {
-            $invalidProperties[] = "'products' can't be null";
-        }
         if (!is_null($this->container['shippingCost']) && ($this->container['shippingCost'] < 0)) {
             $invalidProperties[] = "invalid value for 'shippingCost', must be bigger than or equal to 0.";
         }
 
+        if ($this->container['finalAmount'] === null) {
+            $invalidProperties[] = "'finalAmount' can't be null";
+        }
+        if ($this->container['createdAt'] === null) {
+            $invalidProperties[] = "'createdAt' can't be null";
+        }
+        if ($this->container['expiresAt'] === null) {
+            $invalidProperties[] = "'expiresAt' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -261,9 +288,33 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
 
 
     /**
-     * Gets amount
+     * Gets id
      *
      * @return string
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param string $id id
+     *
+     * @return self
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets amount
+     *
+     * @return float
      */
     public function getAmount()
     {
@@ -273,7 +324,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets amount
      *
-     * @param string $amount amount
+     * @param float $amount amount
      *
      * @return self
      */
@@ -309,33 +360,9 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
-     * Gets autoCapture
-     *
-     * @return bool|null
-     */
-    public function getAutoCapture()
-    {
-        return $this->container['autoCapture'];
-    }
-
-    /**
-     * Sets autoCapture
-     *
-     * @param bool|null $autoCapture autoCapture
-     *
-     * @return self
-     */
-    public function setAutoCapture($autoCapture)
-    {
-        $this->container['autoCapture'] = $autoCapture;
-
-        return $this;
-    }
-
-    /**
      * Gets products
      *
-     * @return \OpenAPI\Client\Model\SdkOrderProduct[]
+     * @return \OpenAPI\Client\Model\SdkOrderProduct[]|null
      */
     public function getProducts()
     {
@@ -345,7 +372,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets products
      *
-     * @param \OpenAPI\Client\Model\SdkOrderProduct[] $products products
+     * @param \OpenAPI\Client\Model\SdkOrderProduct[]|null $products products
      *
      * @return self
      */
@@ -377,7 +404,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     {
 
         if (!is_null($shippingCost) && ($shippingCost < 0)) {
-            throw new \InvalidArgumentException('invalid value for $shippingCost when calling CreateSdkOrderPayload., must be bigger than or equal to 0.');
+            throw new \InvalidArgumentException('invalid value for $shippingCost when calling SdkOrder., must be bigger than or equal to 0.');
         }
 
         $this->container['shippingCost'] = $shippingCost;
@@ -386,25 +413,73 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
-     * Gets webhookUrl
+     * Gets finalAmount
      *
-     * @return string|null
+     * @return float
      */
-    public function getWebhookUrl()
+    public function getFinalAmount()
     {
-        return $this->container['webhookUrl'];
+        return $this->container['finalAmount'];
     }
 
     /**
-     * Sets webhookUrl
+     * Sets finalAmount
      *
-     * @param string|null $webhookUrl webhookUrl
+     * @param float $finalAmount finalAmount
      *
      * @return self
      */
-    public function setWebhookUrl($webhookUrl)
+    public function setFinalAmount($finalAmount)
     {
-        $this->container['webhookUrl'] = $webhookUrl;
+        $this->container['finalAmount'] = $finalAmount;
+
+        return $this;
+    }
+
+    /**
+     * Gets createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->container['createdAt'];
+    }
+
+    /**
+     * Sets createdAt
+     *
+     * @param \DateTime $createdAt createdAt
+     *
+     * @return self
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->container['createdAt'] = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Gets expiresAt
+     *
+     * @return \DateTime
+     */
+    public function getExpiresAt()
+    {
+        return $this->container['expiresAt'];
+    }
+
+    /**
+     * Sets expiresAt
+     *
+     * @param \DateTime $expiresAt expiresAt
+     *
+     * @return self
+     */
+    public function setExpiresAt($expiresAt)
+    {
+        $this->container['expiresAt'] = $expiresAt;
 
         return $this;
     }
@@ -434,25 +509,49 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     }
 
     /**
-     * Gets deeplink
+     * Gets merchant
      *
-     * @return string|null
+     * @return \OpenAPI\Client\Model\Merchant|null
      */
-    public function getDeeplink()
+    public function getMerchant()
     {
-        return $this->container['deeplink'];
+        return $this->container['merchant'];
     }
 
     /**
-     * Sets deeplink
+     * Sets merchant
      *
-     * @param string|null $deeplink deeplink
+     * @param \OpenAPI\Client\Model\Merchant|null $merchant merchant
      *
      * @return self
      */
-    public function setDeeplink($deeplink)
+    public function setMerchant($merchant)
     {
-        $this->container['deeplink'] = $deeplink;
+        $this->container['merchant'] = $merchant;
+
+        return $this;
+    }
+
+    /**
+     * Gets self
+     *
+     * @return \OpenAPI\Client\Model\SdkOrderSelf|null
+     */
+    public function getSelf()
+    {
+        return $this->container['self'];
+    }
+
+    /**
+     * Sets self
+     *
+     * @param \OpenAPI\Client\Model\SdkOrderSelf|null $self self
+     *
+     * @return self
+     */
+    public function setSelf($self)
+    {
+        $this->container['self'] = $self;
 
         return $this;
     }

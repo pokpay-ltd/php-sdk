@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfirmSdkOrderGuestPayloadTest
+ * LoginResponseDataTest
  *
  * PHP version 7.3
  *
@@ -31,15 +31,15 @@ namespace OpenAPI\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ConfirmSdkOrderGuestPayloadTest Class Doc Comment
+ * LoginResponseDataTest Class Doc Comment
  *
  * @category    Class
- * @description ConfirmSdkOrderGuestPayload
+ * @description LoginResponseData
  * @package     OpenAPI\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class ConfirmSdkOrderGuestPayloadTest extends TestCase
+class LoginResponseDataTest extends TestCase
 {
 
     /**
@@ -71,18 +71,54 @@ class ConfirmSdkOrderGuestPayloadTest extends TestCase
     }
 
     /**
-     * Test "ConfirmSdkOrderGuestPayload"
+     * Test "LoginResponseData"
      */
-    public function testConfirmSdkOrderGuestPayload()
+    public function testLoginResponseData()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "creditCardId"
+     * Test attribute "accessToken"
      */
-    public function testPropertyCreditCardId()
+    public function testPropertyAccessToken()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "refreshToken"
+     */
+    public function testPropertyRefreshToken()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "expiresIn"
+     */
+    public function testPropertyExpiresIn()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "tokenType"
+     */
+    public function testPropertyTokenType()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "expiresAt"
+     */
+    public function testPropertyExpiresAt()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

@@ -1,6 +1,6 @@
 <?php
 /**
- * LoginSdkTest
+ * MerchantTest
  *
  * PHP version 7.3
  *
@@ -31,15 +31,15 @@ namespace OpenAPI\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * LoginSdkTest Class Doc Comment
+ * MerchantTest Class Doc Comment
  *
  * @category    Class
- * @description LoginSdk
+ * @description Merchant
  * @package     OpenAPI\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class LoginSdkTest extends TestCase
+class MerchantTest extends TestCase
 {
 
     /**
@@ -71,27 +71,72 @@ class LoginSdkTest extends TestCase
     }
 
     /**
-     * Test "LoginSdk"
+     * Test "Merchant"
      */
-    public function testLoginSdk()
+    public function testMerchant()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "key_id"
+     * Test attribute "id"
      */
-    public function testPropertyKeyId()
+    public function testPropertyId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "key_secret"
+     * Test attribute "name"
      */
-    public function testPropertyKeySecret()
+    public function testPropertyName()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "address"
+     */
+    public function testPropertyAddress()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "fieldOfOperation"
+     */
+    public function testPropertyFieldOfOperation()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "nuis"
+     */
+    public function testPropertyNuis()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "verificationStatus"
+     */
+    public function testPropertyVerificationStatus()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "isVerified"
+     */
+    public function testPropertyIsVerified()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

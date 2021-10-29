@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfirmSdkOrderPayload
+ * SdkOrderResponseData
  *
  * PHP version 7.3
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * ConfirmSdkOrderPayload Class Doc Comment
+ * SdkOrderResponseData Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -42,7 +42,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerializable
+class SdkOrderResponseData implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ConfirmSdkOrderPayload';
+    protected static $openAPIModelName = 'SdkOrderResponseData';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,9 +59,7 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'paymentMethod' => 'string',
-        'paymentMethodId' => 'string',
-        'billingInfoId' => 'string'
+        'sdkOrder' => '\OpenAPI\Client\Model\SdkOrder'
     ];
 
     /**
@@ -72,9 +70,7 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'paymentMethod' => null,
-        'paymentMethodId' => null,
-        'billingInfoId' => null
+        'sdkOrder' => null
     ];
 
     /**
@@ -104,9 +100,7 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'paymentMethod' => 'paymentMethod',
-        'paymentMethodId' => 'paymentMethodId',
-        'billingInfoId' => 'billingInfoId'
+        'sdkOrder' => 'sdkOrder'
     ];
 
     /**
@@ -115,9 +109,7 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'paymentMethod' => 'setPaymentMethod',
-        'paymentMethodId' => 'setPaymentMethodId',
-        'billingInfoId' => 'setBillingInfoId'
+        'sdkOrder' => 'setSdkOrder'
     ];
 
     /**
@@ -126,9 +118,7 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'paymentMethod' => 'getPaymentMethod',
-        'paymentMethodId' => 'getPaymentMethodId',
-        'billingInfoId' => 'getBillingInfoId'
+        'sdkOrder' => 'getSdkOrder'
     ];
 
     /**
@@ -172,21 +162,6 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
         return self::$openAPIModelName;
     }
 
-    const PAYMENT_METHOD_RPAY_CREDIT = 'rpay-credit';
-    const PAYMENT_METHOD_CREDIT_DEBIT_CARD = 'credit-debit-card';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getPaymentMethodAllowableValues()
-    {
-        return [
-            self::PAYMENT_METHOD_RPAY_CREDIT,
-            self::PAYMENT_METHOD_CREDIT_DEBIT_CARD,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -201,11 +176,9 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data)
+    public function __construct(array $data = null)
     {
-        $this->container['paymentMethod'] = $data['paymentMethod'] ?? null;
-        $this->container['paymentMethodId'] = $data['paymentMethodId'] ?? null;
-        $this->container['billingInfoId'] = $data['billingInfoId'] ?? null;
+        $this->container['sdkOrder'] = $data['sdkOrder'] ?? null;
     }
 
     /**
@@ -217,24 +190,6 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
-        if ($this->container['paymentMethod'] === null) {
-            $invalidProperties[] = "'paymentMethod' can't be null";
-        }
-        $allowedValues = $this->getPaymentMethodAllowableValues();
-        if (!is_null($this->container['paymentMethod']) && !in_array($this->container['paymentMethod'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'paymentMethod', must be one of '%s'",
-                $this->container['paymentMethod'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['paymentMethodId'] === null) {
-            $invalidProperties[] = "'paymentMethodId' can't be null";
-        }
-        if ($this->container['billingInfoId'] === null) {
-            $invalidProperties[] = "'billingInfoId' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -251,83 +206,25 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets paymentMethod
+     * Gets sdkOrder
      *
-     * @return string
+     * @return \OpenAPI\Client\Model\SdkOrder|null
      */
-    public function getPaymentMethod()
+    public function getSdkOrder()
     {
-        return $this->container['paymentMethod'];
+        return $this->container['sdkOrder'];
     }
 
     /**
-     * Sets paymentMethod
+     * Sets sdkOrder
      *
-     * @param string $paymentMethod paymentMethod
+     * @param \OpenAPI\Client\Model\SdkOrder|null $sdkOrder sdkOrder
      *
      * @return self
      */
-    public function setPaymentMethod($paymentMethod)
+    public function setSdkOrder($sdkOrder)
     {
-        $allowedValues = $this->getPaymentMethodAllowableValues();
-        if (!in_array($paymentMethod, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'paymentMethod', must be one of '%s'",
-                    $paymentMethod,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['paymentMethod'] = $paymentMethod;
-
-        return $this;
-    }
-
-    /**
-     * Gets paymentMethodId
-     *
-     * @return string
-     */
-    public function getPaymentMethodId()
-    {
-        return $this->container['paymentMethodId'];
-    }
-
-    /**
-     * Sets paymentMethodId
-     *
-     * @param string $paymentMethodId paymentMethodId
-     *
-     * @return self
-     */
-    public function setPaymentMethodId($paymentMethodId)
-    {
-        $this->container['paymentMethodId'] = $paymentMethodId;
-
-        return $this;
-    }
-
-    /**
-     * Gets billingInfoId
-     *
-     * @return string
-     */
-    public function getBillingInfoId()
-    {
-        return $this->container['billingInfoId'];
-    }
-
-    /**
-     * Sets billingInfoId
-     *
-     * @param string $billingInfoId billingInfoId
-     *
-     * @return self
-     */
-    public function setBillingInfoId($billingInfoId)
-    {
-        $this->container['billingInfoId'] = $billingInfoId;
+        $this->container['sdkOrder'] = $sdkOrder;
 
         return $this;
     }

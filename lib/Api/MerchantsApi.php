@@ -69,12 +69,21 @@ class MerchantsApi
     protected $hostIndex;
 
     /**
+     * Id of the logged in merchant
+     * @var string  
+     */
+    protected $merchantId;
+
+    /**
+     * @param string          $merchantId id of the logged in merchant
+     * @param Configuration   $config Configuration
      * @param ClientInterface $client
-     * @param Configuration   $config
      * @param HeaderSelector  $selector
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
+        $merchantId,
+        Configuration $config,
         ClientInterface $client = null,
         HeaderSelector $selector = null,
         $hostIndex = 0
@@ -82,6 +91,7 @@ class MerchantsApi
         $this->client = $client ?: new Client();
         $this->config = Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
+        $this->merchantId = $merchantId;
         $this->hostIndex = $hostIndex;
     }
 
@@ -118,16 +128,15 @@ class MerchantsApi
      *
      * Capture an sdk order
      *
-     * @param  string $merchant_id merchant_id (required)
-     * @param  string $sdk_order_id sdk_order_id (required)
+     * @param  string $sdkOrderId sdkOrderId (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return string
+     * @return \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
-    public function captureOrder($sdk_order_id)
+    public function captureOrder($sdkOrderId)
     {
-        list($response) = $this->captureOrderWithHttpInfo($this->config->getMerchantId(), $sdk_order_id);
+        list($response) = $this->captureOrderWithHttpInfo($this->merchantId, $sdkOrderId);
         return $response;
     }
 
@@ -136,16 +145,16 @@ class MerchantsApi
      *
      * Capture an sdk order
      *
-     * @param  string $merchant_id (required)
-     * @param  string $sdk_order_id (required)
+     * @param  string $merchantId (required)
+     * @param  string $sdkOrderId (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of string, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function captureOrderWithHttpInfo($merchant_id, $sdk_order_id)
+    public function captureOrderWithHttpInfo($merchantId, $sdkOrderId)
     {
-        $request = $this->captureOrderRequest($merchant_id, $sdk_order_id);
+        $request = $this->captureOrderRequest($merchantId, $sdkOrderId);
 
         try {
             $options = $this->createHttpClientOption();
@@ -176,21 +185,57 @@ class MerchantsApi
             }
 
             switch($statusCode) {
-                default:
-                    if ('string' === '\SplFileObject') {
+                case 200:
+                    if ('\OpenAPI\Client\Model\SdkOrderResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'string', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\SdkOrderResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 402:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'string';
+            $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -205,10 +250,34 @@ class MerchantsApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                default:
+                case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'string',
+                        '\OpenAPI\Client\Model\SdkOrderResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 402:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -223,15 +292,15 @@ class MerchantsApi
      *
      * Capture an sdk order
      *
-     * @param  string $merchant_id (required)
-     * @param  string $sdk_order_id (required)
+     * @param  string $merchantId (required)
+     * @param  string $sdkOrderId (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function captureOrderAsync($merchant_id, $sdk_order_id)
+    public function captureOrderAsync($merchantId, $sdkOrderId)
     {
-        return $this->captureOrderAsyncWithHttpInfo($merchant_id, $sdk_order_id)
+        return $this->captureOrderAsyncWithHttpInfo($merchantId, $sdkOrderId)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -244,16 +313,16 @@ class MerchantsApi
      *
      * Capture an sdk order
      *
-     * @param  string $merchant_id (required)
-     * @param  string $sdk_order_id (required)
+     * @param  string $merchantId (required)
+     * @param  string $sdkOrderId (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function captureOrderAsyncWithHttpInfo($merchant_id, $sdk_order_id)
+    public function captureOrderAsyncWithHttpInfo($merchantId, $sdkOrderId)
     {
-        $returnType = 'string';
-        $request = $this->captureOrderRequest($merchant_id, $sdk_order_id);
+        $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
+        $request = $this->captureOrderRequest($merchantId, $sdkOrderId);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -291,24 +360,24 @@ class MerchantsApi
     /**
      * Create request for operation 'captureOrder'
      *
-     * @param  string $merchant_id (required)
-     * @param  string $sdk_order_id (required)
+     * @param  string $merchantId (required)
+     * @param  string $sdkOrderId (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function captureOrderRequest($merchant_id, $sdk_order_id)
+    public function captureOrderRequest($merchantId, $sdkOrderId)
     {
-        // verify the required parameter 'merchant_id' is set
-        if ($merchant_id === null || (is_array($merchant_id) && count($merchant_id) === 0)) {
+        // verify the required parameter 'merchantId' is set
+        if ($merchantId === null || (is_array($merchantId) && count($merchantId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $merchant_id when calling captureOrder'
+                'Missing the required parameter $merchantId when calling captureOrder'
             );
         }
-        // verify the required parameter 'sdk_order_id' is set
-        if ($sdk_order_id === null || (is_array($sdk_order_id) && count($sdk_order_id) === 0)) {
+        // verify the required parameter 'sdkOrderId' is set
+        if ($sdkOrderId === null || (is_array($sdkOrderId) && count($sdkOrderId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $sdk_order_id when calling captureOrder'
+                'Missing the required parameter $sdkOrderId when calling captureOrder'
             );
         }
 
@@ -322,18 +391,18 @@ class MerchantsApi
 
 
         // path params
-        if ($merchant_id !== null) {
+        if ($merchantId !== null) {
             $resourcePath = str_replace(
                 '{' . 'merchantId' . '}',
-                ObjectSerializer::toPathValue($merchant_id),
+                ObjectSerializer::toPathValue($merchantId),
                 $resourcePath
             );
         }
         // path params
-        if ($sdk_order_id !== null) {
+        if ($sdkOrderId !== null) {
             $resourcePath = str_replace(
                 '{' . 'sdkOrderId' . '}',
-                ObjectSerializer::toPathValue($sdk_order_id),
+                ObjectSerializer::toPathValue($sdkOrderId),
                 $resourcePath
             );
         }
@@ -375,13 +444,15 @@ class MerchantsApi
             }
         }
 
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
             $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-        if ($this->config->getAccessToken()) {
-            $defaultHeaders['Authorization'] = $this->config->getAccessToken();
         }
 
         $headers = array_merge(
@@ -404,16 +475,15 @@ class MerchantsApi
      *
      * Create an sdk api order
      *
-     * @param  string $merchant_id merchant_id (required)
      * @param  \OpenAPI\Client\Model\CreateSdkOrderPayload $body body (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return string
+     * @return \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse
      */
     public function createOrder($body = null)
     {
-        list($response) = $this->createOrderWithHttpInfo($this->config->getMerchantId(), $body);
+        list($response) = $this->createOrderWithHttpInfo($this->merchantId, $body);
         return $response;
     }
 
@@ -422,16 +492,16 @@ class MerchantsApi
      *
      * Create an sdk api order
      *
-     * @param  string $merchant_id (required)
+     * @param  string $merchantId (required)
      * @param  \OpenAPI\Client\Model\CreateSdkOrderPayload $body (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of string, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function createOrderWithHttpInfo($merchant_id, $body = null)
+    public function createOrderWithHttpInfo($merchantId, $body = null)
     {
-        $request = $this->createOrderRequest($merchant_id, $body);
+        $request = $this->createOrderRequest($merchantId, $body);
 
         try {
             $options = $this->createHttpClientOption();
@@ -462,21 +532,33 @@ class MerchantsApi
             }
 
             switch($statusCode) {
-                default:
-                    if ('string' === '\SplFileObject') {
+                case 200:
+                    if ('\OpenAPI\Client\Model\SdkOrderResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'string', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\SdkOrderResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'string';
+            $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -491,10 +573,18 @@ class MerchantsApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                default:
+                case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'string',
+                        '\OpenAPI\Client\Model\SdkOrderResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -509,15 +599,15 @@ class MerchantsApi
      *
      * Create an sdk api order
      *
-     * @param  string $merchant_id (required)
+     * @param  string $merchantId (required)
      * @param  \OpenAPI\Client\Model\CreateSdkOrderPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createOrderAsync($merchant_id, $body = null)
+    public function createOrderAsync($merchantId, $body = null)
     {
-        return $this->createOrderAsyncWithHttpInfo($merchant_id, $body)
+        return $this->createOrderAsyncWithHttpInfo($merchantId, $body)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -530,16 +620,16 @@ class MerchantsApi
      *
      * Create an sdk api order
      *
-     * @param  string $merchant_id (required)
+     * @param  string $merchantId (required)
      * @param  \OpenAPI\Client\Model\CreateSdkOrderPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function createOrderAsyncWithHttpInfo($merchant_id, $body = null)
+    public function createOrderAsyncWithHttpInfo($merchantId, $body = null)
     {
-        $returnType = 'string';
-        $request = $this->createOrderRequest($merchant_id, $body);
+        $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
+        $request = $this->createOrderRequest($merchantId, $body);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -577,18 +667,18 @@ class MerchantsApi
     /**
      * Create request for operation 'createOrder'
      *
-     * @param  string $merchant_id (required)
+     * @param  string $merchantId (required)
      * @param  \OpenAPI\Client\Model\CreateSdkOrderPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function createOrderRequest($merchant_id, $body = null)
+    public function createOrderRequest($merchantId, $body = null)
     {
-        // verify the required parameter 'merchant_id' is set
-        if ($merchant_id === null || (is_array($merchant_id) && count($merchant_id) === 0)) {
+        // verify the required parameter 'merchantId' is set
+        if ($merchantId === null || (is_array($merchantId) && count($merchantId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $merchant_id when calling createOrder'
+                'Missing the required parameter $merchantId when calling createOrder'
             );
         }
 
@@ -602,10 +692,10 @@ class MerchantsApi
 
 
         // path params
-        if ($merchant_id !== null) {
+        if ($merchantId !== null) {
             $resourcePath = str_replace(
                 '{' . 'merchantId' . '}',
-                ObjectSerializer::toPathValue($merchant_id),
+                ObjectSerializer::toPathValue($merchantId),
                 $resourcePath
             );
         }
@@ -653,13 +743,15 @@ class MerchantsApi
             }
         }
 
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
 
         $defaultHeaders = [];
         if ($this->config->getUserAgent()) {
             $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-        if ($this->config->getAccessToken()) {
-            $defaultHeaders['Authorization'] = $this->config->getAccessToken();
         }
 
         $headers = array_merge(

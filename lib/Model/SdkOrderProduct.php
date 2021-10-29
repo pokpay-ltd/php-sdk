@@ -1,6 +1,6 @@
 <?php
 /**
- * LoginSdk
+ * SdkOrderProduct
  *
  * PHP version 7.3
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * LoginSdk Class Doc Comment
+ * SdkOrderProduct Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -42,7 +42,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class LoginSdk implements ModelInterface, ArrayAccess, \JsonSerializable
+class SdkOrderProduct implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class LoginSdk implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'LoginSdk';
+    protected static $openAPIModelName = 'SdkOrderProduct';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,8 +59,9 @@ class LoginSdk implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'key_id' => 'string',
-        'key_secret' => 'string'
+        'name' => 'string',
+        'quantity' => 'float',
+        'price' => 'float'
     ];
 
     /**
@@ -71,8 +72,9 @@ class LoginSdk implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'key_id' => null,
-        'key_secret' => null
+        'name' => null,
+        'quantity' => null,
+        'price' => null
     ];
 
     /**
@@ -102,8 +104,9 @@ class LoginSdk implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'key_id' => 'keyId',
-        'key_secret' => 'keySecret'
+        'name' => 'name',
+        'quantity' => 'quantity',
+        'price' => 'price'
     ];
 
     /**
@@ -112,8 +115,9 @@ class LoginSdk implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'key_id' => 'setKeyId',
-        'key_secret' => 'setKeySecret'
+        'name' => 'setName',
+        'quantity' => 'setQuantity',
+        'price' => 'setPrice'
     ];
 
     /**
@@ -122,8 +126,9 @@ class LoginSdk implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'key_id' => 'getKeyId',
-        'key_secret' => 'getKeySecret'
+        'name' => 'getName',
+        'quantity' => 'getQuantity',
+        'price' => 'getPrice'
     ];
 
     /**
@@ -183,8 +188,9 @@ class LoginSdk implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['key_id'] = $data['key_id'] ?? null;
-        $this->container['key_secret'] = $data['key_secret'] ?? null;
+        $this->container['name'] = $data['name'] ?? null;
+        $this->container['quantity'] = $data['quantity'] ?? null;
+        $this->container['price'] = $data['price'] ?? null;
     }
 
     /**
@@ -196,11 +202,14 @@ class LoginSdk implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['key_id'] === null) {
-            $invalidProperties[] = "'key_id' can't be null";
+        if ($this->container['name'] === null) {
+            $invalidProperties[] = "'name' can't be null";
         }
-        if ($this->container['key_secret'] === null) {
-            $invalidProperties[] = "'key_secret' can't be null";
+        if ($this->container['quantity'] === null) {
+            $invalidProperties[] = "'quantity' can't be null";
+        }
+        if ($this->container['price'] === null) {
+            $invalidProperties[] = "'price' can't be null";
         }
         return $invalidProperties;
     }
@@ -218,49 +227,73 @@ class LoginSdk implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets key_id
+     * Gets name
      *
      * @return string
      */
-    public function getKeyId()
+    public function getName()
     {
-        return $this->container['key_id'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets key_id
+     * Sets name
      *
-     * @param string $key_id key_id
+     * @param string $name name
      *
      * @return self
      */
-    public function setKeyId($key_id)
+    public function setName($name)
     {
-        $this->container['key_id'] = $key_id;
+        $this->container['name'] = $name;
 
         return $this;
     }
 
     /**
-     * Gets key_secret
+     * Gets quantity
      *
-     * @return string
+     * @return float
      */
-    public function getKeySecret()
+    public function getQuantity()
     {
-        return $this->container['key_secret'];
+        return $this->container['quantity'];
     }
 
     /**
-     * Sets key_secret
+     * Sets quantity
      *
-     * @param string $key_secret key_secret
+     * @param float $quantity quantity
      *
      * @return self
      */
-    public function setKeySecret($key_secret)
+    public function setQuantity($quantity)
     {
-        $this->container['key_secret'] = $key_secret;
+        $this->container['quantity'] = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * Gets price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->container['price'];
+    }
+
+    /**
+     * Sets price
+     *
+     * @param float $price price
+     *
+     * @return self
+     */
+    public function setPrice($price)
+    {
+        $this->container['price'] = $price;
 
         return $this;
     }

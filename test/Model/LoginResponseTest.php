@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfirmSdkOrderGuestPayloadTest
+ * LoginResponseTest
  *
  * PHP version 7.3
  *
@@ -31,15 +31,15 @@ namespace OpenAPI\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * ConfirmSdkOrderGuestPayloadTest Class Doc Comment
+ * LoginResponseTest Class Doc Comment
  *
  * @category    Class
- * @description ConfirmSdkOrderGuestPayload
+ * @description LoginResponse
  * @package     OpenAPI\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class ConfirmSdkOrderGuestPayloadTest extends TestCase
+class LoginResponseTest extends TestCase
 {
 
     /**
@@ -71,18 +71,45 @@ class ConfirmSdkOrderGuestPayloadTest extends TestCase
     }
 
     /**
-     * Test "ConfirmSdkOrderGuestPayload"
+     * Test "LoginResponse"
      */
-    public function testConfirmSdkOrderGuestPayload()
+    public function testLoginResponse()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "creditCardId"
+     * Test attribute "statusCode"
      */
-    public function testPropertyCreditCardId()
+    public function testPropertyStatusCode()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "serverStatusCode"
+     */
+    public function testPropertyServerStatusCode()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "message"
+     */
+    public function testPropertyMessage()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "data"
+     */
+    public function testPropertyData()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
