@@ -69,12 +69,13 @@ class SdkOrdersApi
     protected $hostIndex;
 
     /**
+     * @param Configuration       $config
      * @param ClientInterface $client
-     * @param Configuration   $config
      * @param HeaderSelector  $selector
      * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
+        Configuration $config,
         ClientInterface $client = null,
         HeaderSelector $selector = null,
         $hostIndex = 0
@@ -118,16 +119,16 @@ class SdkOrdersApi
      *
      * Confirm order.
      *
-     * @param  string $sdk_order_id sdk_order_id (required)
+     * @param  string $sdkOrderId sdkOrderId (required)
      * @param  \OpenAPI\Client\Model\ConfirmSdkOrderPayload $body body (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return string
+     * @return \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
-    public function confirmOrder($sdk_order_id, $body = null)
+    public function confirmOrder($sdkOrderId, $body = null)
     {
-        list($response) = $this->confirmOrderWithHttpInfo($sdk_order_id, $body);
+        list($response) = $this->confirmOrderWithHttpInfo($sdkOrderId, $body);
         return $response;
     }
 
@@ -136,16 +137,16 @@ class SdkOrdersApi
      *
      * Confirm order.
      *
-     * @param  string $sdk_order_id (required)
+     * @param  string $sdkOrderId (required)
      * @param  \OpenAPI\Client\Model\ConfirmSdkOrderPayload $body (optional)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of string, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function confirmOrderWithHttpInfo($sdk_order_id, $body = null)
+    public function confirmOrderWithHttpInfo($sdkOrderId, $body = null)
     {
-        $request = $this->confirmOrderRequest($sdk_order_id, $body);
+        $request = $this->confirmOrderRequest($sdkOrderId, $body);
 
         try {
             $options = $this->createHttpClientOption();
@@ -176,21 +177,57 @@ class SdkOrdersApi
             }
 
             switch($statusCode) {
-                default:
-                    if ('string' === '\SplFileObject') {
+                case 200:
+                    if ('\OpenAPI\Client\Model\SdkOrderResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'string', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\SdkOrderResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'string';
+            $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -205,10 +242,34 @@ class SdkOrdersApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                default:
+                case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'string',
+                        '\OpenAPI\Client\Model\SdkOrderResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 406:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -223,15 +284,15 @@ class SdkOrdersApi
      *
      * Confirm order.
      *
-     * @param  string $sdk_order_id (required)
+     * @param  string $sdkOrderId (required)
      * @param  \OpenAPI\Client\Model\ConfirmSdkOrderPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function confirmOrderAsync($sdk_order_id, $body = null)
+    public function confirmOrderAsync($sdkOrderId, $body = null)
     {
-        return $this->confirmOrderAsyncWithHttpInfo($sdk_order_id, $body)
+        return $this->confirmOrderAsyncWithHttpInfo($sdkOrderId, $body)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -244,16 +305,16 @@ class SdkOrdersApi
      *
      * Confirm order.
      *
-     * @param  string $sdk_order_id (required)
+     * @param  string $sdkOrderId (required)
      * @param  \OpenAPI\Client\Model\ConfirmSdkOrderPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function confirmOrderAsyncWithHttpInfo($sdk_order_id, $body = null)
+    public function confirmOrderAsyncWithHttpInfo($sdkOrderId, $body = null)
     {
-        $returnType = 'string';
-        $request = $this->confirmOrderRequest($sdk_order_id, $body);
+        $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
+        $request = $this->confirmOrderRequest($sdkOrderId, $body);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -291,18 +352,18 @@ class SdkOrdersApi
     /**
      * Create request for operation 'confirmOrder'
      *
-     * @param  string $sdk_order_id (required)
+     * @param  string $sdkOrderId (required)
      * @param  \OpenAPI\Client\Model\ConfirmSdkOrderPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function confirmOrderRequest($sdk_order_id, $body = null)
+    public function confirmOrderRequest($sdkOrderId, $body = null)
     {
-        // verify the required parameter 'sdk_order_id' is set
-        if ($sdk_order_id === null || (is_array($sdk_order_id) && count($sdk_order_id) === 0)) {
+        // verify the required parameter 'sdkOrderId' is set
+        if ($sdkOrderId === null || (is_array($sdkOrderId) && count($sdkOrderId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $sdk_order_id when calling confirmOrder'
+                'Missing the required parameter $sdkOrderId when calling confirmOrder'
             );
         }
 
@@ -316,10 +377,350 @@ class SdkOrdersApi
 
 
         // path params
-        if ($sdk_order_id !== null) {
+        if ($sdkOrderId !== null) {
             $resourcePath = str_replace(
                 '{' . 'sdkOrderId' . '}',
-                ObjectSerializer::toPathValue($sdk_order_id),
+                ObjectSerializer::toPathValue($sdkOrderId),
+                $resourcePath
+            );
+        }
+
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['*/*']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['*/*'],
+                []
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($body)) {
+            if ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($body));
+            } else {
+                $httpBody = $body;
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
+                    foreach ($formParamValueItems as $formParamValueItem) {
+                        $multipartContents[] = [
+                            'name' => $formParamName,
+                            'contents' => $formParamValueItem
+                        ];
+                    }
+                }
+                // for HTTP post (form)
+                $httpBody = new MultipartStream($multipartContents);
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        // this endpoint requires API key authentication
+        $apiKey = $this->config->getApiKeyWithPrefix('Authorization');
+        if ($apiKey !== null) {
+            $headers['Authorization'] = $apiKey;
+        }
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation confirmOrderAsGuest
+     *
+     * Confirm order with guest checkout
+     *
+     * @param  string $sdkOrderId sdkOrderId (required)
+     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body body (optional)
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
+     */
+    public function confirmOrderAsGuest($sdkOrderId, $body = null)
+    {
+        list($response) = $this->confirmOrderAsGuestWithHttpInfo($sdkOrderId, $body);
+        return $response;
+    }
+
+    /**
+     * Operation confirmOrderAsGuestWithHttpInfo
+     *
+     * Confirm order with guest checkout
+     *
+     * @param  string $sdkOrderId (required)
+     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body (optional)
+     *
+     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function confirmOrderAsGuestWithHttpInfo($sdkOrderId, $body = null)
+    {
+        $request = $this->confirmOrderAsGuestRequest($sdkOrderId, $body);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    (int) $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        (string) $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    (string) $response->getBody()
+                );
+            }
+
+            switch($statusCode) {
+                case 200:
+                    if ('\OpenAPI\Client\Model\SdkOrderResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\SdkOrderResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 406:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+            }
+
+            $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
+            if ($returnType === '\SplFileObject') {
+                $content = $response->getBody(); //stream goes to serializer
+            } else {
+                $content = (string) $response->getBody();
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\SdkOrderResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 406:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation confirmOrderAsGuestAsync
+     *
+     * Confirm order with guest checkout
+     *
+     * @param  string $sdkOrderId (required)
+     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function confirmOrderAsGuestAsync($sdkOrderId, $body = null)
+    {
+        return $this->confirmOrderAsGuestAsyncWithHttpInfo($sdkOrderId, $body)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation confirmOrderAsGuestAsyncWithHttpInfo
+     *
+     * Confirm order with guest checkout
+     *
+     * @param  string $sdkOrderId (required)
+     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function confirmOrderAsGuestAsyncWithHttpInfo($sdkOrderId, $body = null)
+    {
+        $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
+        $request = $this->confirmOrderAsGuestRequest($sdkOrderId, $body);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    if ($returnType === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        (string) $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'confirmOrderAsGuest'
+     *
+     * @param  string $sdkOrderId (required)
+     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    public function confirmOrderAsGuestRequest($sdkOrderId, $body = null)
+    {
+        // verify the required parameter 'sdkOrderId' is set
+        if ($sdkOrderId === null || (is_array($sdkOrderId) && count($sdkOrderId) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $sdkOrderId when calling confirmOrderAsGuest'
+            );
+        }
+
+        $resourcePath = '/sdk-orders/{sdkOrderId}/guest-confirm';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+
+        // path params
+        if ($sdkOrderId !== null) {
+            $resourcePath = str_replace(
+                '{' . 'sdkOrderId' . '}',
+                ObjectSerializer::toPathValue($sdkOrderId),
                 $resourcePath
             );
         }
@@ -389,36 +790,36 @@ class SdkOrdersApi
     }
 
     /**
-     * Operation getOrderById
+     * Operation getSdkOrderById
      *
      * Retrieve an order
      *
-     * @param  string $sdk_order_id sdk_order_id (required)
+     * @param  string $sdkOrderId sdkOrderId (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return string
+     * @return \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
      */
-    public function getOrderById($sdk_order_id)
+    public function getSdkOrderById($sdkOrderId)
     {
-        list($response) = $this->getOrderByIdWithHttpInfo($sdk_order_id);
+        list($response) = $this->getSdkOrderByIdWithHttpInfo($sdkOrderId);
         return $response;
     }
 
     /**
-     * Operation getOrderByIdWithHttpInfo
+     * Operation getSdkOrderByIdWithHttpInfo
      *
      * Retrieve an order
      *
-     * @param  string $sdk_order_id (required)
+     * @param  string $sdkOrderId (required)
      *
      * @throws \OpenAPI\Client\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of string, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getOrderByIdWithHttpInfo($sdk_order_id)
+    public function getSdkOrderByIdWithHttpInfo($sdkOrderId)
     {
-        $request = $this->getOrderByIdRequest($sdk_order_id);
+        $request = $this->getSdkOrderByIdRequest($sdkOrderId);
 
         try {
             $options = $this->createHttpClientOption();
@@ -449,21 +850,57 @@ class SdkOrdersApi
             }
 
             switch($statusCode) {
-                default:
-                    if ('string' === '\SplFileObject') {
+                case 200:
+                    if ('\OpenAPI\Client\Model\SdkOrderResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, 'string', []),
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\SdkOrderResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 404:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 410:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                case 500:
+                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                        $content = $response->getBody(); //stream goes to serializer
+                    } else {
+                        $content = (string) $response->getBody();
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = 'string';
+            $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -478,10 +915,34 @@ class SdkOrdersApi
 
         } catch (ApiException $e) {
             switch ($e->getCode()) {
-                default:
+                case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        'string',
+                        '\OpenAPI\Client\Model\SdkOrderResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 404:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 410:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+                case 500:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\OpenAPI\Client\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -492,18 +953,18 @@ class SdkOrdersApi
     }
 
     /**
-     * Operation getOrderByIdAsync
+     * Operation getSdkOrderByIdAsync
      *
      * Retrieve an order
      *
-     * @param  string $sdk_order_id (required)
+     * @param  string $sdkOrderId (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getOrderByIdAsync($sdk_order_id)
+    public function getSdkOrderByIdAsync($sdkOrderId)
     {
-        return $this->getOrderByIdAsyncWithHttpInfo($sdk_order_id)
+        return $this->getSdkOrderByIdAsyncWithHttpInfo($sdkOrderId)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -512,19 +973,19 @@ class SdkOrdersApi
     }
 
     /**
-     * Operation getOrderByIdAsyncWithHttpInfo
+     * Operation getSdkOrderByIdAsyncWithHttpInfo
      *
      * Retrieve an order
      *
-     * @param  string $sdk_order_id (required)
+     * @param  string $sdkOrderId (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getOrderByIdAsyncWithHttpInfo($sdk_order_id)
+    public function getSdkOrderByIdAsyncWithHttpInfo($sdkOrderId)
     {
-        $returnType = 'string';
-        $request = $this->getOrderByIdRequest($sdk_order_id);
+        $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
+        $request = $this->getSdkOrderByIdRequest($sdkOrderId);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -560,19 +1021,19 @@ class SdkOrdersApi
     }
 
     /**
-     * Create request for operation 'getOrderById'
+     * Create request for operation 'getSdkOrderById'
      *
-     * @param  string $sdk_order_id (required)
+     * @param  string $sdkOrderId (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getOrderByIdRequest($sdk_order_id)
+    public function getSdkOrderByIdRequest($sdkOrderId)
     {
-        // verify the required parameter 'sdk_order_id' is set
-        if ($sdk_order_id === null || (is_array($sdk_order_id) && count($sdk_order_id) === 0)) {
+        // verify the required parameter 'sdkOrderId' is set
+        if ($sdkOrderId === null || (is_array($sdkOrderId) && count($sdkOrderId) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $sdk_order_id when calling getOrderById'
+                'Missing the required parameter $sdkOrderId when calling getSdkOrderById'
             );
         }
 
@@ -586,10 +1047,10 @@ class SdkOrdersApi
 
 
         // path params
-        if ($sdk_order_id !== null) {
+        if ($sdkOrderId !== null) {
             $resourcePath = str_replace(
                 '{' . 'sdkOrderId' . '}',
-                ObjectSerializer::toPathValue($sdk_order_id),
+                ObjectSerializer::toPathValue($sdkOrderId),
                 $resourcePath
             );
         }
@@ -646,281 +1107,6 @@ class SdkOrdersApi
         $query = \GuzzleHttp\Psr7\build_query($queryParams);
         return new Request(
             'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
-     * Operation guestConfirmOrder
-     *
-     * Confirm order with guest checkout
-     *
-     * @param  string $sdk_order_id sdk_order_id (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body body (optional)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return string
-     */
-    public function guestConfirmOrder($sdk_order_id, $body = null)
-    {
-        list($response) = $this->guestConfirmOrderWithHttpInfo($sdk_order_id, $body);
-        return $response;
-    }
-
-    /**
-     * Operation guestConfirmOrderWithHttpInfo
-     *
-     * Confirm order with guest checkout
-     *
-     * @param  string $sdk_order_id (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body (optional)
-     *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of string, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function guestConfirmOrderWithHttpInfo($sdk_order_id, $body = null)
-    {
-        $request = $this->guestConfirmOrderRequest($sdk_order_id, $body);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    (int) $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? (string) $e->getResponse()->getBody() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        (string) $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    (string) $response->getBody()
-                );
-            }
-
-            switch($statusCode) {
-                default:
-                    if ('string' === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, 'string', []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-            }
-
-            $returnType = 'string';
-            if ($returnType === '\SplFileObject') {
-                $content = $response->getBody(); //stream goes to serializer
-            } else {
-                $content = (string) $response->getBody();
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                default:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        'string',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation guestConfirmOrderAsync
-     *
-     * Confirm order with guest checkout
-     *
-     * @param  string $sdk_order_id (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function guestConfirmOrderAsync($sdk_order_id, $body = null)
-    {
-        return $this->guestConfirmOrderAsyncWithHttpInfo($sdk_order_id, $body)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation guestConfirmOrderAsyncWithHttpInfo
-     *
-     * Confirm order with guest checkout
-     *
-     * @param  string $sdk_order_id (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function guestConfirmOrderAsyncWithHttpInfo($sdk_order_id, $body = null)
-    {
-        $returnType = 'string';
-        $request = $this->guestConfirmOrderRequest($sdk_order_id, $body);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    if ($returnType === '\SplFileObject') {
-                        $content = $response->getBody(); //stream goes to serializer
-                    } else {
-                        $content = (string) $response->getBody();
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        (string) $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'guestConfirmOrder'
-     *
-     * @param  string $sdk_order_id (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    public function guestConfirmOrderRequest($sdk_order_id, $body = null)
-    {
-        // verify the required parameter 'sdk_order_id' is set
-        if ($sdk_order_id === null || (is_array($sdk_order_id) && count($sdk_order_id) === 0)) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $sdk_order_id when calling guestConfirmOrder'
-            );
-        }
-
-        $resourcePath = '/sdk-orders/{sdkOrderId}/guest-confirm';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-
-
-        // path params
-        if ($sdk_order_id !== null) {
-            $resourcePath = str_replace(
-                '{' . 'sdkOrderId' . '}',
-                ObjectSerializer::toPathValue($sdk_order_id),
-                $resourcePath
-            );
-        }
-
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['*/*']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['*/*'],
-                []
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($body)) {
-            if ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode(ObjectSerializer::sanitizeForSerialization($body));
-            } else {
-                $httpBody = $body;
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $formParamValueItems = is_array($formParamValue) ? $formParamValue : [$formParamValue];
-                    foreach ($formParamValueItems as $formParamValueItem) {
-                        $multipartContents[] = [
-                            'name' => $formParamName,
-                            'contents' => $formParamValueItem
-                        ];
-                    }
-                }
-                // for HTTP post (form)
-                $httpBody = new MultipartStream($multipartContents);
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
-            }
-        }
-
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
-            'POST',
             $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
             $headers,
             $httpBody

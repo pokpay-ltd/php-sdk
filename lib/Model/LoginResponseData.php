@@ -1,6 +1,6 @@
 <?php
 /**
- * ConfirmSdkOrderPayload
+ * LoginResponseData
  *
  * PHP version 7.3
  *
@@ -32,7 +32,7 @@ use \ArrayAccess;
 use \OpenAPI\Client\ObjectSerializer;
 
 /**
- * ConfirmSdkOrderPayload Class Doc Comment
+ * LoginResponseData Class Doc Comment
  *
  * @category Class
  * @package  OpenAPI\Client
@@ -42,7 +42,7 @@ use \OpenAPI\Client\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerializable
+class LoginResponseData implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,7 +51,7 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ConfirmSdkOrderPayload';
+    protected static $openAPIModelName = 'LoginResponseData';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -59,9 +59,11 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       * @var string[]
       */
     protected static $openAPITypes = [
-        'paymentMethod' => 'string',
-        'paymentMethodId' => 'string',
-        'billingInfoId' => 'string'
+        'accessToken' => 'string',
+        'refreshToken' => 'string',
+        'expiresIn' => 'string',
+        'tokenType' => 'string',
+        'expiresAt' => '\DateTime'
     ];
 
     /**
@@ -72,9 +74,11 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'paymentMethod' => null,
-        'paymentMethodId' => null,
-        'billingInfoId' => null
+        'accessToken' => null,
+        'refreshToken' => null,
+        'expiresIn' => null,
+        'tokenType' => null,
+        'expiresAt' => 'date'
     ];
 
     /**
@@ -104,9 +108,11 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $attributeMap = [
-        'paymentMethod' => 'paymentMethod',
-        'paymentMethodId' => 'paymentMethodId',
-        'billingInfoId' => 'billingInfoId'
+        'accessToken' => 'accessToken',
+        'refreshToken' => 'refreshToken',
+        'expiresIn' => 'expiresIn',
+        'tokenType' => 'tokenType',
+        'expiresAt' => 'expiresAt'
     ];
 
     /**
@@ -115,9 +121,11 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $setters = [
-        'paymentMethod' => 'setPaymentMethod',
-        'paymentMethodId' => 'setPaymentMethodId',
-        'billingInfoId' => 'setBillingInfoId'
+        'accessToken' => 'setAccessToken',
+        'refreshToken' => 'setRefreshToken',
+        'expiresIn' => 'setExpiresIn',
+        'tokenType' => 'setTokenType',
+        'expiresAt' => 'setExpiresAt'
     ];
 
     /**
@@ -126,9 +134,11 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @var string[]
      */
     protected static $getters = [
-        'paymentMethod' => 'getPaymentMethod',
-        'paymentMethodId' => 'getPaymentMethodId',
-        'billingInfoId' => 'getBillingInfoId'
+        'accessToken' => 'getAccessToken',
+        'refreshToken' => 'getRefreshToken',
+        'expiresIn' => 'getExpiresIn',
+        'tokenType' => 'getTokenType',
+        'expiresAt' => 'getExpiresAt'
     ];
 
     /**
@@ -172,21 +182,6 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
         return self::$openAPIModelName;
     }
 
-    const PAYMENT_METHOD_RPAY_CREDIT = 'rpay-credit';
-    const PAYMENT_METHOD_CREDIT_DEBIT_CARD = 'credit-debit-card';
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getPaymentMethodAllowableValues()
-    {
-        return [
-            self::PAYMENT_METHOD_RPAY_CREDIT,
-            self::PAYMENT_METHOD_CREDIT_DEBIT_CARD,
-        ];
-    }
 
     /**
      * Associative array for storing property values
@@ -201,11 +196,13 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
      * @param mixed[] $data Associated array of property values
      *                      initializing the model
      */
-    public function __construct(array $data)
+    public function __construct(array $data = null)
     {
-        $this->container['paymentMethod'] = $data['paymentMethod'] ?? null;
-        $this->container['paymentMethodId'] = $data['paymentMethodId'] ?? null;
-        $this->container['billingInfoId'] = $data['billingInfoId'] ?? null;
+        $this->container['accessToken'] = $data['accessToken'] ?? null;
+        $this->container['refreshToken'] = $data['refreshToken'] ?? null;
+        $this->container['expiresIn'] = $data['expiresIn'] ?? null;
+        $this->container['tokenType'] = $data['tokenType'] ?? null;
+        $this->container['expiresAt'] = $data['expiresAt'] ?? null;
     }
 
     /**
@@ -217,24 +214,6 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
     {
         $invalidProperties = [];
 
-        if ($this->container['paymentMethod'] === null) {
-            $invalidProperties[] = "'paymentMethod' can't be null";
-        }
-        $allowedValues = $this->getPaymentMethodAllowableValues();
-        if (!is_null($this->container['paymentMethod']) && !in_array($this->container['paymentMethod'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value '%s' for 'paymentMethod', must be one of '%s'",
-                $this->container['paymentMethod'],
-                implode("', '", $allowedValues)
-            );
-        }
-
-        if ($this->container['paymentMethodId'] === null) {
-            $invalidProperties[] = "'paymentMethodId' can't be null";
-        }
-        if ($this->container['billingInfoId'] === null) {
-            $invalidProperties[] = "'billingInfoId' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -251,83 +230,121 @@ class ConfirmSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSerial
 
 
     /**
-     * Gets paymentMethod
+     * Gets accessToken
      *
-     * @return string
+     * @return string|null
      */
-    public function getPaymentMethod()
+    public function getAccessToken()
     {
-        return $this->container['paymentMethod'];
+        return $this->container['accessToken'];
     }
 
     /**
-     * Sets paymentMethod
+     * Sets accessToken
      *
-     * @param string $paymentMethod paymentMethod
+     * @param string|null $accessToken accessToken
      *
      * @return self
      */
-    public function setPaymentMethod($paymentMethod)
+    public function setAccessToken($accessToken)
     {
-        $allowedValues = $this->getPaymentMethodAllowableValues();
-        if (!in_array($paymentMethod, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value '%s' for 'paymentMethod', must be one of '%s'",
-                    $paymentMethod,
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['paymentMethod'] = $paymentMethod;
+        $this->container['accessToken'] = $accessToken;
 
         return $this;
     }
 
     /**
-     * Gets paymentMethodId
+     * Gets refreshToken
      *
-     * @return string
+     * @return string|null
      */
-    public function getPaymentMethodId()
+    public function getRefreshToken()
     {
-        return $this->container['paymentMethodId'];
+        return $this->container['refreshToken'];
     }
 
     /**
-     * Sets paymentMethodId
+     * Sets refreshToken
      *
-     * @param string $paymentMethodId paymentMethodId
+     * @param string|null $refreshToken refreshToken
      *
      * @return self
      */
-    public function setPaymentMethodId($paymentMethodId)
+    public function setRefreshToken($refreshToken)
     {
-        $this->container['paymentMethodId'] = $paymentMethodId;
+        $this->container['refreshToken'] = $refreshToken;
 
         return $this;
     }
 
     /**
-     * Gets billingInfoId
+     * Gets expiresIn
      *
-     * @return string
+     * @return string|null
      */
-    public function getBillingInfoId()
+    public function getExpiresIn()
     {
-        return $this->container['billingInfoId'];
+        return $this->container['expiresIn'];
     }
 
     /**
-     * Sets billingInfoId
+     * Sets expiresIn
      *
-     * @param string $billingInfoId billingInfoId
+     * @param string|null $expiresIn expiresIn
      *
      * @return self
      */
-    public function setBillingInfoId($billingInfoId)
+    public function setExpiresIn($expiresIn)
     {
-        $this->container['billingInfoId'] = $billingInfoId;
+        $this->container['expiresIn'] = $expiresIn;
+
+        return $this;
+    }
+
+    /**
+     * Gets tokenType
+     *
+     * @return string|null
+     */
+    public function getTokenType()
+    {
+        return $this->container['tokenType'];
+    }
+
+    /**
+     * Sets tokenType
+     *
+     * @param string|null $tokenType tokenType
+     *
+     * @return self
+     */
+    public function setTokenType($tokenType)
+    {
+        $this->container['tokenType'] = $tokenType;
+
+        return $this;
+    }
+
+    /**
+     * Gets expiresAt
+     *
+     * @return \DateTime|null
+     */
+    public function getExpiresAt()
+    {
+        return $this->container['expiresAt'];
+    }
+
+    /**
+     * Sets expiresAt
+     *
+     * @param \DateTime|null $expiresAt expiresAt
+     *
+     * @return self
+     */
+    public function setExpiresAt($expiresAt)
+    {
+        $this->container['expiresAt'] = $expiresAt;
 
         return $this;
     }

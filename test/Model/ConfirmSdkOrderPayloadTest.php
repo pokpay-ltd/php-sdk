@@ -80,7 +80,7 @@ class ConfirmSdkOrderPayloadTest extends TestCase
     }
 
     /**
-     * Test attribute "payment_method"
+     * Test attribute "paymentMethod"
      */
     public function testPropertyPaymentMethod()
     {
@@ -89,7 +89,7 @@ class ConfirmSdkOrderPayloadTest extends TestCase
     }
 
     /**
-     * Test attribute "payment_method_id"
+     * Test attribute "paymentMethodId"
      */
     public function testPropertyPaymentMethodId()
     {
@@ -98,7 +98,7 @@ class ConfirmSdkOrderPayloadTest extends TestCase
     }
 
     /**
-     * Test attribute "billing_info_id"
+     * Test attribute "billingInfoId"
      */
     public function testPropertyBillingInfoId()
     {

@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSdkOrderProductsObjectTest
+ * LoginSdkPayloadTest
  *
  * PHP version 7.3
  *
@@ -31,15 +31,15 @@ namespace OpenAPI\Client\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * CreateSdkOrderProductsObjectTest Class Doc Comment
+ * LoginSdkPayloadTest Class Doc Comment
  *
  * @category    Class
- * @description CreateSdkOrderProductsObject
+ * @description LoginSdkPayload
  * @package     OpenAPI\Client
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class CreateSdkOrderProductsObjectTest extends TestCase
+class LoginSdkPayloadTest extends TestCase
 {
 
     /**
@@ -71,36 +71,27 @@ class CreateSdkOrderProductsObjectTest extends TestCase
     }
 
     /**
-     * Test "CreateSdkOrderProductsObject"
+     * Test "LoginSdkPayload"
      */
-    public function testCreateSdkOrderProductsObject()
+    public function testLoginSdkPayload()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "name"
+     * Test attribute "keyId"
      */
-    public function testPropertyName()
+    public function testPropertyKeyId()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "quantity"
+     * Test attribute "keySecret"
      */
-    public function testPropertyQuantity()
-    {
-        // TODO: implement
-        $this->markTestIncomplete('Not implemented');
-    }
-
-    /**
-     * Test attribute "price"
-     */
-    public function testPropertyPrice()
+    public function testPropertyKeySecret()
     {
         // TODO: implement
         $this->markTestIncomplete('Not implemented');

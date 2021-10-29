@@ -1,11 +1,9 @@
-# # ConfirmSdkOrderPayload
+# # SdkOrderResponseData
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**paymentMethod** | **string** |  |
-**paymentMethodId** | **string** |  |
-**billingInfoId** | **string** |  |
+**sdkOrder** | [**\OpenAPI\Client\Model\SdkOrder**](SdkOrder.md) |  | [optional]
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

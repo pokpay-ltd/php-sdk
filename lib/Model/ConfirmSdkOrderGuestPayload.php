@@ -59,7 +59,7 @@ class ConfirmSdkOrderGuestPayload implements ModelInterface, ArrayAccess, \JsonS
       * @var string[]
       */
     protected static $openAPITypes = [
-        'credit_card_id' => 'string'
+        'creditCardId' => 'string'
     ];
 
     /**
@@ -70,7 +70,7 @@ class ConfirmSdkOrderGuestPayload implements ModelInterface, ArrayAccess, \JsonS
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'credit_card_id' => null
+        'creditCardId' => null
     ];
 
     /**
@@ -100,7 +100,7 @@ class ConfirmSdkOrderGuestPayload implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $attributeMap = [
-        'credit_card_id' => 'creditCardId'
+        'creditCardId' => 'creditCardId'
     ];
 
     /**
@@ -109,7 +109,7 @@ class ConfirmSdkOrderGuestPayload implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $setters = [
-        'credit_card_id' => 'setCreditCardId'
+        'creditCardId' => 'setCreditCardId'
     ];
 
     /**
@@ -118,7 +118,7 @@ class ConfirmSdkOrderGuestPayload implements ModelInterface, ArrayAccess, \JsonS
      * @var string[]
      */
     protected static $getters = [
-        'credit_card_id' => 'getCreditCardId'
+        'creditCardId' => 'getCreditCardId'
     ];
 
     /**
@@ -178,7 +178,7 @@ class ConfirmSdkOrderGuestPayload implements ModelInterface, ArrayAccess, \JsonS
      */
     public function __construct(array $data = null)
     {
-        $this->container['credit_card_id'] = $data['credit_card_id'] ?? null;
+        $this->container['creditCardId'] = $data['creditCardId'] ?? null;
     }
 
     /**
@@ -190,8 +190,8 @@ class ConfirmSdkOrderGuestPayload implements ModelInterface, ArrayAccess, \JsonS
     {
         $invalidProperties = [];
 
-        if ($this->container['credit_card_id'] === null) {
-            $invalidProperties[] = "'credit_card_id' can't be null";
+        if ($this->container['creditCardId'] === null) {
+            $invalidProperties[] = "'creditCardId' can't be null";
         }
         return $invalidProperties;
     }
@@ -209,25 +209,25 @@ class ConfirmSdkOrderGuestPayload implements ModelInterface, ArrayAccess, \JsonS
 
 
     /**
-     * Gets credit_card_id
+     * Gets creditCardId
      *
      * @return string
      */
     public function getCreditCardId()
     {
-        return $this->container['credit_card_id'];
+        return $this->container['creditCardId'];
     }
 
     /**
-     * Sets credit_card_id
+     * Sets creditCardId
      *
-     * @param string $credit_card_id credit_card_id
+     * @param string $creditCardId creditCardId
      *
      * @return self
      */
-    public function setCreditCardId($credit_card_id)
+    public function setCreditCardId($creditCardId)
     {
-        $this->container['credit_card_id'] = $credit_card_id;
+        $this->container['creditCardId'] = $creditCardId;
 
         return $this;
     }

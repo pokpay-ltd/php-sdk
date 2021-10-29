@@ -1,6 +1,6 @@
 # OpenAPI\Client\AuthApi
 
-All URIs are relative to http://0.0.0.0:3000.
+All URIs are relative to *https://api.pokpay.io* in the production environment and *https://api-staging.pokpay.io* in the staging environment.
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -10,7 +10,7 @@ Method | HTTP request | Description
 ## `login()`
 
 ```php
-login($body): string
+login($body): \OpenAPI\Client\Model\LoginResponse
 ```
 
 Login Sdk
@@ -21,14 +21,19 @@ Login Sdk
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-
+// Create the configuration for the API calls
+// getDefaultConfiguration accepts a parameter to specify whether the production environment is used
+// By default the staging environment is used
+// The same configuration is later used for all the other API classes
+$config = OpenAPI\Client\Configuration::getDefaultConfiguration(true);
 
 $apiInstance = new OpenAPI\Client\Api\AuthApi(
+    $config,
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$body = new \OpenAPI\Client\Model\LoginSdk(); // \OpenAPI\Client\Model\LoginSdk
+$body = new \OpenAPI\Client\Model\LoginSdkPayload(); // \OpenAPI\Client\Model\LoginSdkPayload
 
 try {
     $result = $apiInstance->login($body);
@@ -42,11 +47,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\OpenAPI\Client\Model\LoginSdk**](../Model/LoginSdk.md)|  | [optional]
+ **body** | [**\OpenAPI\Client\Model\LoginSdkPayload**](../Model/LoginSdkPayload.md)|  | [optional]
 
 ### Return type
 
-**string**
+[**\OpenAPI\Client\Model\LoginResponse**](../Model/LoginResponse.md)
 
 ### Authorization
 
