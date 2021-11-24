@@ -83,13 +83,13 @@ class MerchantsApi
      */
     public function __construct(
         $merchantId,
-        Configuration $config,
+        Configuration $config = null,
         ClientInterface $client = null,
         HeaderSelector $selector = null,
         $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
-        $this->config = Configuration::getDefaultConfiguration();
+        $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->merchantId = $merchantId;
         $this->hostIndex = $hostIndex;
