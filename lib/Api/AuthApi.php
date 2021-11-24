@@ -72,16 +72,16 @@ class AuthApi
      * @param Configuration $config configuration
      * @param ClientInterface $client
      * @param HeaderSelector  $selector
-     * @param int             $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
+     * @param int $hostIndex (Optional) host index to select the list of hosts if defined in the OpenAPI spec
      */
     public function __construct(
-        Configuration $config,
+        Configuration $config = null,
         ClientInterface $client = null,
         HeaderSelector $selector = null,
-        $hostIndex = 0
+        int $hostIndex = 0
     ) {
         $this->client = $client ?: new Client();
-        $this->config = $config;
+        $this->config = $config ?: Configuration::getDefaultConfiguration();
         $this->headerSelector = $selector ?: new HeaderSelector();
         $this->hostIndex = $hostIndex;
     }
@@ -128,7 +128,6 @@ class AuthApi
     public function login($body)
     {
         list($response) = $this->loginWithHttpInfo($body);
-        $this->config->setApiKey('Authorization', $response->getData()->getAccessToken());
         return $response;
     }
 
