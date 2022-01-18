@@ -50,9 +50,9 @@ require_once(__DIR__ . '/vendor/autoload.php');
 // getDefaultConfiguration accepts a parameter to specify whether the production environment is used
 // By default the staging environment is used
 // The same configuration is later used for all the other API classes
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration(true);
+$config = RPay\POK\PaymentsSdk\Configuration::getDefaultConfiguration(true);
 
-$apiInstance = new OpenAPI\Client\Api\AuthApi(
+$apiInstance = new RPay\POK\PaymentsSdk\Api\AuthApi(
     $config,
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
@@ -62,7 +62,7 @@ $apiInstance = new OpenAPI\Client\Api\AuthApi(
 $keyId = 'PokPay Key Id';
 $keySecret = 'PokPay Key Secret';
 
-$payload = new \OpenAPI\Client\Model\LoginSdkPayload($keyId, $keySecret); // \OpenAPI\Client\Model\LoginSdkPayload
+$payload = new \RPay\POK\PaymentsSdk\Model\LoginSdkPayload($keyId, $keySecret); // \RPay\POK\PaymentsSdk\Model\LoginSdkPayload
 
 try {
     $result = $apiInstance->login($payload);

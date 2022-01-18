@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **id** | **string** |  |
 **name** | **string** |  |
 **address** | **string** |  |
-**fieldOfOperation** | [**\OpenAPI\Client\Model\FieldOfOperation[]**](FieldOfOperation.md) |  | [optional]
+**fieldOfOperation** | [**\RPay\POK\PaymentsSdk\Model\FieldOfOperation[]**](FieldOfOperation.md) |  | [optional]
 **nuis** | **string** |  |
 **verificationStatus** | **string** |  |
 **isVerified** | **bool** |  | [optional]

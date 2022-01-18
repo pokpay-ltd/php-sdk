@@ -5,7 +5,7 @@
  * PHP version 7.3
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Model;
+namespace RPay\POK\PaymentsSdk\Model;
 
 use \ArrayAccess;
-use \OpenAPI\Client\ObjectSerializer;
+use \RPay\POK\PaymentsSdk\ObjectSerializer;
 
 /**
  * Merchant Class Doc Comment
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
@@ -62,7 +62,7 @@ class Merchant implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'string',
         'name' => 'string',
         'address' => 'string',
-        'fieldOfOperation' => '\OpenAPI\Client\Model\FieldOfOperation[]',
+        'fieldOfOperation' => '\RPay\POK\PaymentsSdk\Model\FieldOfOperation[]',
         'nuis' => 'string',
         'verificationStatus' => 'string',
         'isVerified' => 'bool'
@@ -359,7 +359,7 @@ class Merchant implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets fieldOfOperation
      *
-     * @return \OpenAPI\Client\Model\FieldOfOperation[]|null
+     * @return \RPay\POK\PaymentsSdk\Model\FieldOfOperation[]|null
      */
     public function getFieldOfOperation()
     {
@@ -369,7 +369,7 @@ class Merchant implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets fieldOfOperation
      *
-     * @param \OpenAPI\Client\Model\FieldOfOperation[]|null $fieldOfOperation fieldOfOperation
+     * @param \RPay\POK\PaymentsSdk\Model\FieldOfOperation[]|null $fieldOfOperation fieldOfOperation
      *
      * @return self
      */

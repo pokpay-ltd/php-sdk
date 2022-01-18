@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **amount** | **string** |  |
 **currencyCode** | **string** |  | [default to 'ALL']
 **autoCapture** | **bool** |  | [optional]
-**products** | [**\OpenAPI\Client\Model\SdkOrderProduct[]**](SdkOrderProduct.md) |  |
+**products** | [**\RPay\POK\PaymentsSdk\Model\SdkOrderProduct[]**](SdkOrderProduct.md) |  |
 **shippingCost** | **float** |  | [optional]
 **webhookUrl** | **string** |  | [optional]
 **redirectUrl** | **string** |  | [optional]

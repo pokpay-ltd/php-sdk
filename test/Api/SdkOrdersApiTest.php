@@ -4,7 +4,7 @@
  * PHP version 7.3
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -25,18 +25,18 @@
  * Please update the test case below to test the endpoint.
  */
 
-namespace OpenAPI\Client\Test\Api;
+namespace RPay\POK\PaymentsSdk\Test\Api;
 
-use \OpenAPI\Client\Configuration;
-use \OpenAPI\Client\ApiException;
-use \OpenAPI\Client\ObjectSerializer;
+use \RPay\POK\PaymentsSdk\Configuration;
+use \RPay\POK\PaymentsSdk\ApiException;
+use \RPay\POK\PaymentsSdk\ObjectSerializer;
 use PHPUnit\Framework\TestCase;
 
 /**
  * SdkOrdersApiTest Class Doc Comment
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */

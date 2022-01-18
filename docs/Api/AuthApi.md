@@ -1,4 +1,4 @@
-# OpenAPI\Client\AuthApi
+# RPay\POK\PaymentsSdk\AuthApi
 
 All URIs are relative to *https://api.pokpay.io* in the production environment and *https://api-staging.pokpay.io* in the staging environment.
 
@@ -10,7 +10,7 @@ Method | HTTP request | Description
 ## `login()`
 
 ```php
-login($body): \OpenAPI\Client\Model\LoginResponse
+login($body): \RPay\POK\PaymentsSdk\Model\LoginResponse
 ```
 
 Login Sdk
@@ -25,15 +25,15 @@ require_once(__DIR__ . '/vendor/autoload.php');
 // getDefaultConfiguration accepts a parameter to specify whether the production environment is used
 // By default the staging environment is used
 // The same configuration is later used for all the other API classes
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration(true);
+$config = RPay\POK\PaymentsSdk\Configuration::getDefaultConfiguration(true);
 
-$apiInstance = new OpenAPI\Client\Api\AuthApi(
+$apiInstance = new RPay\POK\PaymentsSdk\Api\AuthApi(
     $config,
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
-$body = new \OpenAPI\Client\Model\LoginSdkPayload(); // \OpenAPI\Client\Model\LoginSdkPayload
+$body = new \RPay\POK\PaymentsSdk\Model\LoginSdkPayload(); // \RPay\POK\PaymentsSdk\Model\LoginSdkPayload
 
 try {
     $result = $apiInstance->login($body);
@@ -47,11 +47,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**\OpenAPI\Client\Model\LoginSdkPayload**](../Model/LoginSdkPayload.md)|  | [optional]
+ **body** | [**\RPay\POK\PaymentsSdk\Model\LoginSdkPayload**](../Model/LoginSdkPayload.md)|  | [optional]
 
 ### Return type
 
-[**\OpenAPI\Client\Model\LoginResponse**](../Model/LoginResponse.md)
+[**\RPay\POK\PaymentsSdk\Model\LoginResponse**](../Model/LoginResponse.md)
 
 ### Authorization
 

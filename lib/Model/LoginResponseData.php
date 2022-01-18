@@ -5,7 +5,7 @@
  * PHP version 7.3
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Model;
+namespace RPay\POK\PaymentsSdk\Model;
 
 use \ArrayAccess;
-use \OpenAPI\Client\ObjectSerializer;
+use \RPay\POK\PaymentsSdk\ObjectSerializer;
 
 /**
  * LoginResponseData Class Doc Comment
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>

@@ -4,7 +4,7 @@
  * PHP version 7.3
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Api;
+namespace RPay\POK\PaymentsSdk\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -33,16 +33,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use OpenAPI\Client\ApiException;
-use OpenAPI\Client\Configuration;
-use OpenAPI\Client\HeaderSelector;
-use OpenAPI\Client\ObjectSerializer;
+use RPay\POK\PaymentsSdk\ApiException;
+use RPay\POK\PaymentsSdk\Configuration;
+use RPay\POK\PaymentsSdk\HeaderSelector;
+use RPay\POK\PaymentsSdk\ObjectSerializer;
 
 /**
  * SdkOrdersApi Class Doc Comment
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -120,11 +120,11 @@ class SdkOrdersApi
      * Confirm order.
      *
      * @param  string $sdkOrderId sdkOrderId (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderPayload $body body (optional)
+     * @param  \RPay\POK\PaymentsSdk\Model\ConfirmSdkOrderPayload $body body (optional)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \RPay\POK\PaymentsSdk\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
+     * @return \RPay\POK\PaymentsSdk\Model\SdkOrderResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse
      */
     public function confirmOrder($sdkOrderId, $body = null)
     {
@@ -138,11 +138,11 @@ class SdkOrdersApi
      * Confirm order.
      *
      * @param  string $sdkOrderId (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderPayload $body (optional)
+     * @param  \RPay\POK\PaymentsSdk\Model\ConfirmSdkOrderPayload $body (optional)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \RPay\POK\PaymentsSdk\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \RPay\POK\PaymentsSdk\Model\SdkOrderResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function confirmOrderWithHttpInfo($sdkOrderId, $body = null)
     {
@@ -178,56 +178,56 @@ class SdkOrdersApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\OpenAPI\Client\Model\SdkOrderResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\SdkOrderResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\SdkOrderResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\SdkOrderResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 406:
-                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 500:
-                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
+            $returnType = '\RPay\POK\PaymentsSdk\Model\SdkOrderResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -245,7 +245,7 @@ class SdkOrdersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\SdkOrderResponse',
+                        '\RPay\POK\PaymentsSdk\Model\SdkOrderResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -253,7 +253,7 @@ class SdkOrdersApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\ErrorResponse',
+                        '\RPay\POK\PaymentsSdk\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -261,7 +261,7 @@ class SdkOrdersApi
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\ErrorResponse',
+                        '\RPay\POK\PaymentsSdk\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -269,7 +269,7 @@ class SdkOrdersApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\ErrorResponse',
+                        '\RPay\POK\PaymentsSdk\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -285,7 +285,7 @@ class SdkOrdersApi
      * Confirm order.
      *
      * @param  string $sdkOrderId (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderPayload $body (optional)
+     * @param  \RPay\POK\PaymentsSdk\Model\ConfirmSdkOrderPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -306,14 +306,14 @@ class SdkOrdersApi
      * Confirm order.
      *
      * @param  string $sdkOrderId (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderPayload $body (optional)
+     * @param  \RPay\POK\PaymentsSdk\Model\ConfirmSdkOrderPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function confirmOrderAsyncWithHttpInfo($sdkOrderId, $body = null)
     {
-        $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
+        $returnType = '\RPay\POK\PaymentsSdk\Model\SdkOrderResponse';
         $request = $this->confirmOrderRequest($sdkOrderId, $body);
 
         return $this->client
@@ -353,7 +353,7 @@ class SdkOrdersApi
      * Create request for operation 'confirmOrder'
      *
      * @param  string $sdkOrderId (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderPayload $body (optional)
+     * @param  \RPay\POK\PaymentsSdk\Model\ConfirmSdkOrderPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -460,11 +460,11 @@ class SdkOrdersApi
      * Confirm order with guest checkout
      *
      * @param  string $sdkOrderId sdkOrderId (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body body (optional)
+     * @param  \RPay\POK\PaymentsSdk\Model\ConfirmSdkOrderGuestPayload $body body (optional)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \RPay\POK\PaymentsSdk\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
+     * @return \RPay\POK\PaymentsSdk\Model\SdkOrderResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse
      */
     public function confirmOrderAsGuest($sdkOrderId, $body = null)
     {
@@ -478,11 +478,11 @@ class SdkOrdersApi
      * Confirm order with guest checkout
      *
      * @param  string $sdkOrderId (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body (optional)
+     * @param  \RPay\POK\PaymentsSdk\Model\ConfirmSdkOrderGuestPayload $body (optional)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \RPay\POK\PaymentsSdk\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \RPay\POK\PaymentsSdk\Model\SdkOrderResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function confirmOrderAsGuestWithHttpInfo($sdkOrderId, $body = null)
     {
@@ -518,56 +518,56 @@ class SdkOrdersApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\OpenAPI\Client\Model\SdkOrderResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\SdkOrderResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\SdkOrderResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\SdkOrderResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 406:
-                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 500:
-                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
+            $returnType = '\RPay\POK\PaymentsSdk\Model\SdkOrderResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -585,7 +585,7 @@ class SdkOrdersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\SdkOrderResponse',
+                        '\RPay\POK\PaymentsSdk\Model\SdkOrderResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -593,7 +593,7 @@ class SdkOrdersApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\ErrorResponse',
+                        '\RPay\POK\PaymentsSdk\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -601,7 +601,7 @@ class SdkOrdersApi
                 case 406:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\ErrorResponse',
+                        '\RPay\POK\PaymentsSdk\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -609,7 +609,7 @@ class SdkOrdersApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\ErrorResponse',
+                        '\RPay\POK\PaymentsSdk\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -625,7 +625,7 @@ class SdkOrdersApi
      * Confirm order with guest checkout
      *
      * @param  string $sdkOrderId (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body (optional)
+     * @param  \RPay\POK\PaymentsSdk\Model\ConfirmSdkOrderGuestPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -646,14 +646,14 @@ class SdkOrdersApi
      * Confirm order with guest checkout
      *
      * @param  string $sdkOrderId (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body (optional)
+     * @param  \RPay\POK\PaymentsSdk\Model\ConfirmSdkOrderGuestPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function confirmOrderAsGuestAsyncWithHttpInfo($sdkOrderId, $body = null)
     {
-        $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
+        $returnType = '\RPay\POK\PaymentsSdk\Model\SdkOrderResponse';
         $request = $this->confirmOrderAsGuestRequest($sdkOrderId, $body);
 
         return $this->client
@@ -693,7 +693,7 @@ class SdkOrdersApi
      * Create request for operation 'confirmOrderAsGuest'
      *
      * @param  string $sdkOrderId (required)
-     * @param  \OpenAPI\Client\Model\ConfirmSdkOrderGuestPayload $body (optional)
+     * @param  \RPay\POK\PaymentsSdk\Model\ConfirmSdkOrderGuestPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
@@ -796,9 +796,9 @@ class SdkOrdersApi
      *
      * @param  string $sdkOrderId sdkOrderId (required)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \RPay\POK\PaymentsSdk\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
+     * @return \RPay\POK\PaymentsSdk\Model\SdkOrderResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse
      */
     public function getSdkOrderById($sdkOrderId)
     {
@@ -813,9 +813,9 @@ class SdkOrdersApi
      *
      * @param  string $sdkOrderId (required)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \RPay\POK\PaymentsSdk\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\SdkOrderResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \RPay\POK\PaymentsSdk\Model\SdkOrderResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getSdkOrderByIdWithHttpInfo($sdkOrderId)
     {
@@ -851,56 +851,56 @@ class SdkOrdersApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\OpenAPI\Client\Model\SdkOrderResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\SdkOrderResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\SdkOrderResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\SdkOrderResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 404:
-                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 410:
-                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 500:
-                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
+            $returnType = '\RPay\POK\PaymentsSdk\Model\SdkOrderResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -918,7 +918,7 @@ class SdkOrdersApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\SdkOrderResponse',
+                        '\RPay\POK\PaymentsSdk\Model\SdkOrderResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -926,7 +926,7 @@ class SdkOrdersApi
                 case 404:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\ErrorResponse',
+                        '\RPay\POK\PaymentsSdk\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -934,7 +934,7 @@ class SdkOrdersApi
                 case 410:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\ErrorResponse',
+                        '\RPay\POK\PaymentsSdk\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -942,7 +942,7 @@ class SdkOrdersApi
                 case 500:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\ErrorResponse',
+                        '\RPay\POK\PaymentsSdk\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -984,7 +984,7 @@ class SdkOrdersApi
      */
     public function getSdkOrderByIdAsyncWithHttpInfo($sdkOrderId)
     {
-        $returnType = '\OpenAPI\Client\Model\SdkOrderResponse';
+        $returnType = '\RPay\POK\PaymentsSdk\Model\SdkOrderResponse';
         $request = $this->getSdkOrderByIdRequest($sdkOrderId);
 
         return $this->client

@@ -1,4 +1,4 @@
-# OpenAPI\Client\MerchantsApi
+# RPay\POK\PaymentsSdk\MerchantsApi
 
 All URIs are relative to *https://api.pokpay.io* in the production environment and *https://api-staging.pokpay.io* in the staging environment.
 All URIs use authorization, so AuthApi->login must be completed successfully firstly.
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 ## `captureOrder()`
 
 ```php
-captureOrder($merchantId, $sdkOrderId): \OpenAPI\Client\Model\SdkOrderResponse
+captureOrder($merchantId, $sdkOrderId): \RPay\POK\PaymentsSdk\Model\SdkOrderResponse
 ```
 
 Capture an sdk order
@@ -23,11 +23,11 @@ Capture an sdk order
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration();
+$config = RPay\POK\PaymentsSdk\Configuration::getDefaultConfiguration();
 
 $merchantId = 'YOUR_POKPAY_MERCHANT_ID';
 
-$apiInstance = new OpenAPI\Client\Api\MerchantsApi(
+$apiInstance = new RPay\POK\PaymentsSdk\Api\MerchantsApi(
     $merchantId,
     $config,
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -54,7 +54,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**\OpenAPI\Client\Model\SdkOrderResponse**](../Model/SdkOrderResponse.md)
+[**\RPay\POK\PaymentsSdk\Model\SdkOrderResponse**](../Model/SdkOrderResponse.md)
 
 ### Authorization
 
@@ -72,7 +72,7 @@ Name | Type | Description  | Notes
 ## `createOrder()`
 
 ```php
-createOrder($merchantId, $body): \OpenAPI\Client\Model\SdkOrderResponse
+createOrder($merchantId, $body): \RPay\POK\PaymentsSdk\Model\SdkOrderResponse
 ```
 
 Create an sdk api order
@@ -83,11 +83,11 @@ Create an sdk api order
 <?php
 require_once(__DIR__ . '/vendor/autoload.php');
 
-$config = OpenAPI\Client\Configuration::getDefaultConfiguration();
+$config = RPay\POK\PaymentsSdk\Configuration::getDefaultConfiguration();
 
 $merchantId = 'YOUR_POKPAY_MERCHANT_ID';
 
-$apiInstance = new OpenAPI\Client\Api\MerchantsApi(
+$apiInstance = new RPay\POK\PaymentsSdk\Api\MerchantsApi(
     $merchantId,
     $config,
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
@@ -101,7 +101,7 @@ $sdkOrderInfo = [
     'products' => [],
 ];
 
-$body = new \OpenAPI\Client\Model\CreateSdkOrderPayload($sdkOrderInfo); // \OpenAPI\Client\Model\CreateSdkOrderPayload
+$body = new \RPay\POK\PaymentsSdk\Model\CreateSdkOrderPayload($sdkOrderInfo); // \RPay\POK\PaymentsSdk\Model\CreateSdkOrderPayload
 
 try {
     $result = $apiInstance->createOrder($body);
@@ -116,11 +116,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **merchantId** | **string**|  |
- **body** | [**\OpenAPI\Client\Model\CreateSdkOrderPayload**](../Model/CreateSdkOrderPayload.md)|  | [optional]
+ **body** | [**\RPay\POK\PaymentsSdk\Model\CreateSdkOrderPayload**](../Model/CreateSdkOrderPayload.md)|  | [optional]
 
 ### Return type
 
-[**\OpenAPI\Client\Model\SdkOrderResponse**](../Model/SdkOrderResponse.md)
+[**\RPay\POK\PaymentsSdk\Model\SdkOrderResponse**](../Model/SdkOrderResponse.md)
 
 ### Authorization
 

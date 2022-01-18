@@ -4,7 +4,7 @@
  * PHP version 7.3
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -25,7 +25,7 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Api;
+namespace RPay\POK\PaymentsSdk\Api;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
@@ -33,16 +33,16 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\MultipartStream;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\RequestOptions;
-use OpenAPI\Client\ApiException;
-use OpenAPI\Client\Configuration;
-use OpenAPI\Client\HeaderSelector;
-use OpenAPI\Client\ObjectSerializer;
+use RPay\POK\PaymentsSdk\ApiException;
+use RPay\POK\PaymentsSdk\Configuration;
+use RPay\POK\PaymentsSdk\HeaderSelector;
+use RPay\POK\PaymentsSdk\ObjectSerializer;
 
 /**
  * AuthApi Class Doc Comment
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -119,11 +119,11 @@ class AuthApi
      *
      * Login Sdk
      *
-     * @param  \OpenAPI\Client\Model\LoginSdkPayload $body body
+     * @param  \RPay\POK\PaymentsSdk\Model\LoginSdkPayload $body body
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \RPay\POK\PaymentsSdk\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \OpenAPI\Client\Model\LoginResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse
+     * @return \RPay\POK\PaymentsSdk\Model\LoginResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse
      */
     public function login($body)
     {
@@ -136,11 +136,11 @@ class AuthApi
      *
      * Login Sdk
      *
-     * @param  \OpenAPI\Client\Model\LoginSdkPayload $body (optional)
+     * @param  \RPay\POK\PaymentsSdk\Model\LoginSdkPayload $body (optional)
      *
-     * @throws \OpenAPI\Client\ApiException on non-2xx response
+     * @throws \RPay\POK\PaymentsSdk\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \OpenAPI\Client\Model\LoginResponse|\OpenAPI\Client\Model\ErrorResponse|\OpenAPI\Client\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \RPay\POK\PaymentsSdk\Model\LoginResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function loginWithHttpInfo($body = null)
     {
@@ -176,44 +176,44 @@ class AuthApi
 
             switch($statusCode) {
                 case 200:
-                    if ('\OpenAPI\Client\Model\LoginResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\LoginResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\LoginResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\LoginResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 400:
-                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
                 case 403:
-                    if ('\OpenAPI\Client\Model\ErrorResponse' === '\SplFileObject') {
+                    if ('\RPay\POK\PaymentsSdk\Model\ErrorResponse' === '\SplFileObject') {
                         $content = $response->getBody(); //stream goes to serializer
                     } else {
                         $content = (string) $response->getBody();
                     }
 
                     return [
-                        ObjectSerializer::deserialize($content, '\OpenAPI\Client\Model\ErrorResponse', []),
+                        ObjectSerializer::deserialize($content, '\RPay\POK\PaymentsSdk\Model\ErrorResponse', []),
                         $response->getStatusCode(),
                         $response->getHeaders()
                     ];
             }
 
-            $returnType = '\OpenAPI\Client\Model\LoginResponse';
+            $returnType = '\RPay\POK\PaymentsSdk\Model\LoginResponse';
             if ($returnType === '\SplFileObject') {
                 $content = $response->getBody(); //stream goes to serializer
             } else {
@@ -231,7 +231,7 @@ class AuthApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\LoginResponse',
+                        '\RPay\POK\PaymentsSdk\Model\LoginResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -239,7 +239,7 @@ class AuthApi
                 case 400:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\ErrorResponse',
+                        '\RPay\POK\PaymentsSdk\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -247,7 +247,7 @@ class AuthApi
                 case 403:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\OpenAPI\Client\Model\ErrorResponse',
+                        '\RPay\POK\PaymentsSdk\Model\ErrorResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -262,7 +262,7 @@ class AuthApi
      *
      * Login Sdk
      *
-     * @param  \OpenAPI\Client\Model\LoginSdkPayload $body (optional)
+     * @param  \RPay\POK\PaymentsSdk\Model\LoginSdkPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
@@ -282,14 +282,14 @@ class AuthApi
      *
      * Login Sdk
      *
-     * @param  \OpenAPI\Client\Model\LoginSdkPayload $body (optional)
+     * @param  \RPay\POK\PaymentsSdk\Model\LoginSdkPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
     public function loginAsyncWithHttpInfo($body = null)
     {
-        $returnType = '\OpenAPI\Client\Model\LoginResponse';
+        $returnType = '\RPay\POK\PaymentsSdk\Model\LoginResponse';
         $request = $this->loginRequest($body);
 
         return $this->client
@@ -328,7 +328,7 @@ class AuthApi
     /**
      * Create request for operation 'login'
      *
-     * @param  \OpenAPI\Client\Model\LoginSdkPayload $body (optional)
+     * @param  \RPay\POK\PaymentsSdk\Model\LoginSdkPayload $body (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
