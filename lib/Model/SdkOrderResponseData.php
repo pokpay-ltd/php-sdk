@@ -5,7 +5,7 @@
  * PHP version 7.3
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Model;
+namespace RPay\POK\PaymentsSdk\Model;
 
 use \ArrayAccess;
-use \OpenAPI\Client\ObjectSerializer;
+use \RPay\POK\PaymentsSdk\ObjectSerializer;
 
 /**
  * SdkOrderResponseData Class Doc Comment
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
@@ -59,7 +59,7 @@ class SdkOrderResponseData implements ModelInterface, ArrayAccess, \JsonSerializ
       * @var string[]
       */
     protected static $openAPITypes = [
-        'sdkOrder' => '\OpenAPI\Client\Model\SdkOrder'
+        'sdkOrder' => '\RPay\POK\PaymentsSdk\Model\SdkOrder'
     ];
 
     /**
@@ -208,7 +208,7 @@ class SdkOrderResponseData implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Gets sdkOrder
      *
-     * @return \OpenAPI\Client\Model\SdkOrder|null
+     * @return \RPay\POK\PaymentsSdk\Model\SdkOrder|null
      */
     public function getSdkOrder()
     {
@@ -218,7 +218,7 @@ class SdkOrderResponseData implements ModelInterface, ArrayAccess, \JsonSerializ
     /**
      * Sets sdkOrder
      *
-     * @param \OpenAPI\Client\Model\SdkOrder|null $sdkOrder sdkOrder
+     * @param \RPay\POK\PaymentsSdk\Model\SdkOrder|null $sdkOrder sdkOrder
      *
      * @return self
      */

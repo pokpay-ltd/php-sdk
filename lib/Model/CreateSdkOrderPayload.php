@@ -5,7 +5,7 @@
  * PHP version 7.3
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Model;
+namespace RPay\POK\PaymentsSdk\Model;
 
 use \ArrayAccess;
-use \OpenAPI\Client\ObjectSerializer;
+use \RPay\POK\PaymentsSdk\ObjectSerializer;
 
 /**
  * CreateSdkOrderPayload Class Doc Comment
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
@@ -62,7 +62,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'amount' => 'string',
         'currencyCode' => 'string',
         'autoCapture' => 'bool',
-        'products' => '\OpenAPI\Client\Model\SdkOrderProduct[]',
+        'products' => '\RPay\POK\PaymentsSdk\Model\SdkOrderProduct[]',
         'shippingCost' => 'float',
         'webhookUrl' => 'string',
         'redirectUrl' => 'string',
@@ -335,7 +335,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Gets products
      *
-     * @return \OpenAPI\Client\Model\SdkOrderProduct[]
+     * @return \RPay\POK\PaymentsSdk\Model\SdkOrderProduct[]
      */
     public function getProducts()
     {
@@ -345,7 +345,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     /**
      * Sets products
      *
-     * @param \OpenAPI\Client\Model\SdkOrderProduct[] $products products
+     * @param \RPay\POK\PaymentsSdk\Model\SdkOrderProduct[] $products products
      *
      * @return self
      */

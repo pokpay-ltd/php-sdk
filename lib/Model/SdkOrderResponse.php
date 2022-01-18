@@ -5,7 +5,7 @@
  * PHP version 7.3
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Model;
+namespace RPay\POK\PaymentsSdk\Model;
 
 use \ArrayAccess;
-use \OpenAPI\Client\ObjectSerializer;
+use \RPay\POK\PaymentsSdk\ObjectSerializer;
 
 /**
  * SdkOrderResponse Class Doc Comment
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
@@ -62,7 +62,7 @@ class SdkOrderResponse implements ModelInterface, ArrayAccess, \JsonSerializable
         'statusCode' => 'float',
         'serverStatusCode' => 'float',
         'message' => 'string',
-        'data' => '\OpenAPI\Client\Model\SdkOrderResponseData'
+        'data' => '\RPay\POK\PaymentsSdk\Model\SdkOrderResponseData'
     ];
 
     /**
@@ -298,7 +298,7 @@ class SdkOrderResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets data
      *
-     * @return \OpenAPI\Client\Model\SdkOrderResponseData|null
+     * @return \RPay\POK\PaymentsSdk\Model\SdkOrderResponseData|null
      */
     public function getData()
     {
@@ -308,7 +308,7 @@ class SdkOrderResponse implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets data
      *
-     * @param \OpenAPI\Client\Model\SdkOrderResponseData|null $data data
+     * @param \RPay\POK\PaymentsSdk\Model\SdkOrderResponseData|null $data data
      *
      * @return self
      */

@@ -5,7 +5,7 @@
  * PHP version 7.3
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
@@ -26,16 +26,16 @@
  * Do not edit the class manually.
  */
 
-namespace OpenAPI\Client\Model;
+namespace RPay\POK\PaymentsSdk\Model;
 
 use \ArrayAccess;
-use \OpenAPI\Client\ObjectSerializer;
+use \RPay\POK\PaymentsSdk\ObjectSerializer;
 
 /**
  * SdkOrder Class Doc Comment
  *
  * @category Class
- * @package  OpenAPI\Client
+ * @package  RPay\POK\PaymentsSdk
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<TKey, TValue>
@@ -62,14 +62,14 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'id' => 'string',
         'amount' => 'float',
         'currencyCode' => 'string',
-        'products' => '\OpenAPI\Client\Model\SdkOrderProduct[]',
+        'products' => '\RPay\POK\PaymentsSdk\Model\SdkOrderProduct[]',
         'shippingCost' => 'float',
         'finalAmount' => 'float',
         'createdAt' => '\DateTime',
         'expiresAt' => '\DateTime',
         'redirectUrl' => 'string',
-        'merchant' => '\OpenAPI\Client\Model\Merchant',
-        'self' => '\OpenAPI\Client\Model\SdkOrderSelf'
+        'merchant' => '\RPay\POK\PaymentsSdk\Model\Merchant',
+        'self' => '\RPay\POK\PaymentsSdk\Model\SdkOrderSelf'
     ];
 
     /**
@@ -362,7 +362,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets products
      *
-     * @return \OpenAPI\Client\Model\SdkOrderProduct[]|null
+     * @return \RPay\POK\PaymentsSdk\Model\SdkOrderProduct[]|null
      */
     public function getProducts()
     {
@@ -372,7 +372,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets products
      *
-     * @param \OpenAPI\Client\Model\SdkOrderProduct[]|null $products products
+     * @param \RPay\POK\PaymentsSdk\Model\SdkOrderProduct[]|null $products products
      *
      * @return self
      */
@@ -511,7 +511,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets merchant
      *
-     * @return \OpenAPI\Client\Model\Merchant|null
+     * @return \RPay\POK\PaymentsSdk\Model\Merchant|null
      */
     public function getMerchant()
     {
@@ -521,7 +521,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets merchant
      *
-     * @param \OpenAPI\Client\Model\Merchant|null $merchant merchant
+     * @param \RPay\POK\PaymentsSdk\Model\Merchant|null $merchant merchant
      *
      * @return self
      */
@@ -535,7 +535,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Gets self
      *
-     * @return \OpenAPI\Client\Model\SdkOrderSelf|null
+     * @return \RPay\POK\PaymentsSdk\Model\SdkOrderSelf|null
      */
     public function getSelf()
     {
@@ -545,7 +545,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets self
      *
-     * @param \OpenAPI\Client\Model\SdkOrderSelf|null $self self
+     * @param \RPay\POK\PaymentsSdk\Model\SdkOrderSelf|null $self self
      *
      * @return self
      */
