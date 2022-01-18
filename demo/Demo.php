@@ -22,7 +22,7 @@ class Demo
         $sdkOrder = new CreateSdkOrderPayload([
             'products' => [],
             'amount' => 400, // if products array is empty this is required
-            'currencyCode' => 'ALL', // currently, we support only ALL
+            'currencyCode' => 'ALL', // currently, we support only ALL and EUR
             'autoCapture' => true, //if false, $merchantsApi->captureOrder() will be required after client confirmation,
             'redirectUrl' => 'https://www.example.com/some-path', // (optional)
             'webhookUrl' => 'https://www.example.com/some-wh-listener', // (optional) will be POST-ed by our server along with order data
@@ -30,7 +30,8 @@ class Demo
 
         $createdOrder = $merchantsApi->createOrder($sdkOrder);
 
-        return $createdOrder->getData()->getSdkOrder()
+        return $createdOrder->getData()
+            ->getSdkOrder()
             ->getSelf()
             ->getConfirmUrl();
     }
