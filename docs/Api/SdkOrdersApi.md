@@ -24,8 +24,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 $apiInstance = new RPay\POK\PaymentsSdk\Api\SdkOrdersApi(
     $config,
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
 );
 
@@ -81,8 +79,6 @@ require_once(__DIR__ . '/vendor/autoload.php');
 $config = RPay\POK\PaymentsSdk\Configuration::getDefaultConfiguration();
 
 $apiInstance = new RPay\POK\PaymentsSdk\Api\SdkOrdersApi(
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
 $sdkOrderId = 'sdkOrderId_example'; // string
@@ -138,8 +134,6 @@ $config = RPay\POK\PaymentsSdk\Configuration::getDefaultConfiguration();
 
 $apiInstance = new RPay\POK\PaymentsSdk\Api\SdkOrdersApi(
     $config,
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
 );
 $sdkOrderId = 'sdkOrderId_example'; // string

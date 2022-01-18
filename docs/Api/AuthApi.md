@@ -28,8 +28,6 @@ $config = RPay\POK\PaymentsSdk\Configuration::getDefaultConfiguration(true);
 
 $apiInstance = new RPay\POK\PaymentsSdk\Api\AuthApi(
     $config,
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client()
 );
 $body = new \RPay\POK\PaymentsSdk\Model\LoginSdkPayload(); // \RPay\POK\PaymentsSdk\Model\LoginSdkPayload

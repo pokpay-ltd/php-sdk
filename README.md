@@ -1,4 +1,4 @@
-# OpenAPIClient-php
+# PokPay Payments SDK
 
 PokPay's PHP SDK for Checkout REST APIs
 
@@ -10,24 +10,9 @@ PHP 7.3 and later.
 Should also work with PHP 8.0 but has not been tested.
 
 ### Composer
-
-To install the bindings via [Composer](https://getcomposer.org/), add the following to `composer.json`:
-
-```json
-{
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/GIT_USER_ID/GIT_REPO_ID.git"
-    }
-  ],
-  "require": {
-    "GIT_USER_ID/GIT_REPO_ID": "*@dev"
-  }
-}
+```bash
+$ composer require rpay/pokpay-payments-sdk
 ```
-
-Then run `composer install`
 
 ### Manual Installation
 
@@ -35,7 +20,7 @@ Download the files and include `autoload.php`:
 
 ```php
 <?php
-require_once('/path/to/OpenAPIClient-php/vendor/autoload.php');
+require_once('/path/to/pok-payments-sdk/vendor/autoload.php');
 ```
 
 ## Logging in with API key
@@ -54,8 +39,6 @@ $config = RPay\POK\PaymentsSdk\Configuration::getDefaultConfiguration(true);
 
 $apiInstance = new RPay\POK\PaymentsSdk\Api\AuthApi(
     $config,
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
 );
 
@@ -77,14 +60,14 @@ try {
 
 All URIs are relative to *https://api.pokpay.io* in the production environment and *https://api-staging.pokpay.io* in the staging environment
 
-Class | Method | HTTP request | Description
------------- | ------------- | ------------- | -------------
-*AuthApi* | [**login**](docs/Api/AuthApi.md#login) | **POST** /auth/sdk/login | Login Sdk
-*MerchantsApi* | [**captureOrder**](docs/Api/MerchantsApi.md#captureorder) | **POST** /merchants/{merchantId}/sdk-orders/{sdkOrderId}/capture | Capture an sdk order
-*MerchantsApi* | [**createOrder**](docs/Api/MerchantsApi.md#createorder) | **POST** /merchants/{merchantId}/sdk-orders | Create an sdk api order
-*SdkOrdersApi* | [**confirmOrder**](docs/Api/SdkOrdersApi.md#confirmorder) | **POST** /sdk-orders/{sdkOrderId}/confirm | Confirm order.
-*SdkOrdersApi* | [**confirmOrderAsGuest**](docs/Api/SdkOrdersApi.md#confirmorderasguest) | **POST** /sdk-orders/{sdkOrderId}/guest-confirm | Confirm order with guest checkout
-*SdkOrdersApi* | [**getSdkOrderById**](docs/Api/SdkOrdersApi.md#getsdkorderbyid) | **GET** /sdk-orders/{sdkOrderId} | Retrieve an order
+| Class          | Method                                                                  | HTTP request                                                     | Description                       |
+|----------------|-------------------------------------------------------------------------|------------------------------------------------------------------|-----------------------------------|
+| *AuthApi*      | [**login**](docs/Api/AuthApi.md#login)                                  | **POST** /auth/sdk/login                                         | Login Sdk                         |
+| *MerchantsApi* | [**captureOrder**](docs/Api/MerchantsApi.md#captureorder)               | **POST** /merchants/{merchantId}/sdk-orders/{sdkOrderId}/capture | Capture an sdk order              |
+| *MerchantsApi* | [**createOrder**](docs/Api/MerchantsApi.md#createorder)                 | **POST** /merchants/{merchantId}/sdk-orders                      | Create an sdk api order           |
+| *SdkOrdersApi* | [**confirmOrder**](docs/Api/SdkOrdersApi.md#confirmorder)               | **POST** /sdk-orders/{sdkOrderId}/confirm                        | Confirm order.                    |
+| *SdkOrdersApi* | [**confirmOrderAsGuest**](docs/Api/SdkOrdersApi.md#confirmorderasguest) | **POST** /sdk-orders/{sdkOrderId}/guest-confirm                  | Confirm order with guest checkout |
+| *SdkOrdersApi* | [**getSdkOrderById**](docs/Api/SdkOrdersApi.md#getsdkorderbyid)         | **GET** /sdk-orders/{sdkOrderId}                                 | Retrieve an order                 |
 
 ## Models
 
@@ -122,7 +105,7 @@ vendor/bin/phpunit
 ```
 
 ## Author
-
+[RPay Ltd](https://www.rpay.ai)
 
 
 ## About this package

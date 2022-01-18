@@ -29,8 +29,6 @@ $merchantId = 'YOUR_POKPAY_MERCHANT_ID';
 $apiInstance = new RPay\POK\PaymentsSdk\Api\MerchantsApi(
     $merchantId,
     $config,
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
 );
 
@@ -89,8 +87,6 @@ $merchantId = 'YOUR_POKPAY_MERCHANT_ID';
 $apiInstance = new RPay\POK\PaymentsSdk\Api\MerchantsApi(
     $merchantId,
     $config,
-    // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
-    // This is optional, `GuzzleHttp\Client` will be used as default.
     new GuzzleHttp\Client(),
 );
 
