@@ -3,11 +3,10 @@
 All URIs are relative to *https://api.pokpay.io* in the production environment and *https://api-staging.pokpay.io* in the staging environment.
 All URIs use authorization, so AuthApi->login must be completed successfully firstly.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**captureOrder()**](MerchantsApi.md#captureOrder) | **POST** /merchants/{merchantId}/sdk-orders/{sdkOrderId}/capture | Capture an sdk order
-[**createOrder()**](MerchantsApi.md#createOrder) | **POST** /merchants/{merchantId}/sdk-orders | Create an sdk api order
-
+| Method                                             | HTTP request                                                     | Description             |
+|----------------------------------------------------|------------------------------------------------------------------|-------------------------|
+| [**captureOrder()**](MerchantsApi.md#captureOrder) | **POST** /merchants/{merchantId}/sdk-orders/{sdkOrderId}/capture | Capture an sdk order    |
+| [**createOrder()**](MerchantsApi.md#createOrder)   | **POST** /merchants/{merchantId}/sdk-orders                      | Create an sdk api order |
 
 ## `captureOrder()`
 
@@ -47,10 +46,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **merchantId** | **string**|  |
- **sdkOrderId** | **string**|  |
+| Name           | Type       | Description | Notes |
+|----------------|------------|-------------|-------|
+| **merchantId** | **string** |             |       |
+| **sdkOrderId** | **string** |             |       |
 
 ### Return type
 
@@ -113,10 +112,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **merchantId** | **string**|  |
- **body** | [**\RPay\POK\PaymentsSdk\Model\CreateSdkOrderPayload**](../Model/CreateSdkOrderPayload.md)|  | [optional]
+| Name           | Type                                                                                       | Description | Notes      |
+|----------------|--------------------------------------------------------------------------------------------|-------------|------------|
+| **merchantId** | **string**                                                                                 |             |            |
+| **body**       | [**\RPay\POK\PaymentsSdk\Model\CreateSdkOrderPayload**](../Model/CreateSdkOrderPayload.md) |             | [optional] |
 
 ### Return type
 

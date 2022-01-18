@@ -2,10 +2,9 @@
 
 All URIs are relative to *https://api.pokpay.io* in the production environment and *https://api-staging.pokpay.io* in the staging environment.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**login()**](AuthApi.md#login) | **POST** /auth/sdk/login | Login Sdk
-
+| Method                          | HTTP request             | Description |
+|---------------------------------|--------------------------|-------------|
+| [**login()**](AuthApi.md#login) | **POST** /auth/sdk/login | Login Sdk   |
 
 ## `login()`
 
@@ -45,9 +44,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **body** | [**\RPay\POK\PaymentsSdk\Model\LoginSdkPayload**](../Model/LoginSdkPayload.md)|  | [optional]
+| Name     | Type                                                                           | Description | Notes      |
+|----------|--------------------------------------------------------------------------------|-------------|------------|
+| **body** | [**\RPay\POK\PaymentsSdk\Model\LoginSdkPayload**](../Model/LoginSdkPayload.md) |             | [optional] |
 
 ### Return type
 

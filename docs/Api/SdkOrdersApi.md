@@ -2,12 +2,11 @@
 
 All URIs are relative to *https://api.pokpay.io* in the production environment and *https://api-staging.pokpay.io* in the staging environment.
 
-Method | HTTP request | Description
-------------- | ------------- | -------------
-[**confirmOrder()**](SdkOrdersApi.md#confirmOrder) | **POST** /sdk-orders/{sdkOrderId}/confirm | Confirm order.
-[**confirmOrderAsGuest()**](SdkOrdersApi.md#confirmOrderAsGuest) | **POST** /sdk-orders/{sdkOrderId}/guest-confirm | Confirm order with guest checkout
-[**getSdkOrderById()**](SdkOrdersApi.md#getSdkOrderById) | **GET** /sdk-orders/{sdkOrderId} | Retrieve an order
-
+| Method                                                           | HTTP request                                    | Description                       |
+|------------------------------------------------------------------|-------------------------------------------------|-----------------------------------|
+| [**confirmOrder()**](SdkOrdersApi.md#confirmOrder)               | **POST** /sdk-orders/{sdkOrderId}/confirm       | Confirm order.                    |
+| [**confirmOrderAsGuest()**](SdkOrdersApi.md#confirmOrderAsGuest) | **POST** /sdk-orders/{sdkOrderId}/guest-confirm | Confirm order with guest checkout |
+| [**getSdkOrderById()**](SdkOrdersApi.md#getSdkOrderById)         | **GET** /sdk-orders/{sdkOrderId}                | Retrieve an order                 |
 
 ## `confirmOrder()`
 
@@ -43,10 +42,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sdkOrderId** | **string**|  |
- **body** | [**\RPay\POK\PaymentsSdk\Model\ConfirmSdkOrderPayload**](../Model/ConfirmSdkOrderPayload.md)|  | [optional]
+| Name           | Type                                                                                         | Description | Notes      |
+|----------------|----------------------------------------------------------------------------------------------|-------------|------------|
+| **sdkOrderId** | **string**                                                                                   |             |            |
+| **body**       | [**\RPay\POK\PaymentsSdk\Model\ConfirmSdkOrderPayload**](../Model/ConfirmSdkOrderPayload.md) |             | [optional] |
 
 ### Return type
 
@@ -99,10 +98,10 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sdkOrderId** | **string**|  |
- **body** | [**\RPay\POK\PaymentsSdk\Model\ConfirmSdkOrderGuestPayload**](../Model/ConfirmSdkOrderGuestPayload.md)|  | [optional]
+| Name           | Type                                                                                                   | Description | Notes      |
+|----------------|--------------------------------------------------------------------------------------------------------|-------------|------------|
+| **sdkOrderId** | **string**                                                                                             |             |            |
+| **body**       | [**\RPay\POK\PaymentsSdk\Model\ConfirmSdkOrderGuestPayload**](../Model/ConfirmSdkOrderGuestPayload.md) |             | [optional] |
 
 ### Return type
 
@@ -155,9 +154,9 @@ try {
 
 ### Parameters
 
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **sdkOrderId** | **string**|  |
+| Name           | Type       | Description | Notes |
+|----------------|------------|-------------|-------|
+| **sdkOrderId** | **string** |             |       |
 
 ### Return type
 
