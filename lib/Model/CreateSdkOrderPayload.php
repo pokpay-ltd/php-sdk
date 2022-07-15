@@ -66,6 +66,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'shippingCost' => 'float',
         'webhookUrl' => 'string',
         'redirectUrl' => 'string',
+        'merchantCustomReference' => 'string',
         'deeplink' => 'string'
     ];
 
@@ -84,6 +85,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'shippingCost' => null,
         'webhookUrl' => null,
         'redirectUrl' => null,
+        'merchantCustomReference' => null,
         'deeplink' => null
     ];
 
@@ -121,6 +123,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'shippingCost' => 'shippingCost',
         'webhookUrl' => 'webhookUrl',
         'redirectUrl' => 'redirectUrl',
+        'merchantCustomReference' => 'merchantCustomReference',
         'deeplink' => 'deeplink'
     ];
 
@@ -137,6 +140,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'shippingCost' => 'setShippingCost',
         'webhookUrl' => 'setWebhookUrl',
         'redirectUrl' => 'setRedirectUrl',
+        'merchantCustomReference' => 'setMerchantCustomReference',
         'deeplink' => 'setDeeplink'
     ];
 
@@ -153,6 +157,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'shippingCost' => 'getShippingCost',
         'webhookUrl' => 'getWebhookUrl',
         'redirectUrl' => 'getRedirectUrl',
+        'merchantCustomReference' => 'getMerchantCustomReference',
         'deeplink' => 'getDeeplink'
     ];
 
@@ -220,6 +225,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->container['shippingCost'] = $data['shippingCost'] ?? null;
         $this->container['webhookUrl'] = $data['webhookUrl'] ?? null;
         $this->container['redirectUrl'] = $data['redirectUrl'] ?? null;
+        $this->container['merchantCustomReference'] = $data['merchantCustomReference'] ?? null;
         $this->container['deeplink'] = $data['deeplink'] ?? null;
     }
 
@@ -429,6 +435,31 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setRedirectUrl($redirectUrl)
     {
         $this->container['redirectUrl'] = $redirectUrl;
+
+        return $this;
+    }
+
+
+    /**
+     * Gets merchantCustomReference
+     *
+     * @return string|null
+     */
+    public function getMerchantCustomReference()
+    {
+        return $this->container['merchantCustomReference'];
+    }
+
+    /**
+     * Sets merchantCustomReference
+     *
+     * @param string|null $merchantCustomReference merchantCustomReference
+     *
+     * @return self
+     */
+    public function setMerchantCustomReference($merchantCustomReference)
+    {
+        $this->container['merchantCustomReference'] = $merchantCustomReference;
 
         return $this;
     }

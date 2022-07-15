@@ -161,6 +161,15 @@ class SdkOrderTest extends TestCase
     }
 
     /**
+     * Test attribute "merchantCustomReference"
+     */
+    public function testPropertyMerchantCustomReference()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "merchant"
      */
     public function testPropertyMerchant()

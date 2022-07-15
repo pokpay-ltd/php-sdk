@@ -143,6 +143,15 @@ class CreateSdkOrderPayloadTest extends TestCase
     }
 
     /**
+     * Test attribute "merchantCustomReference"
+     */
+    public function testMerchantCustomReference()
+    {
+        // TODO: implement
+        $this->markTestIncomplete('Not implemented');
+    }
+
+    /**
      * Test attribute "deeplink"
      */
     public function testPropertyDeeplink()

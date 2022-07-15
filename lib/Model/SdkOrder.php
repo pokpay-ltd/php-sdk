@@ -68,6 +68,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => '\DateTime',
         'expiresAt' => '\DateTime',
         'redirectUrl' => 'string',
+        'merchantCustomReference' => 'string',
         'merchant' => '\RPay\POK\PaymentsSdk\Model\Merchant',
         'self' => '\RPay\POK\PaymentsSdk\Model\SdkOrderSelf'
     ];
@@ -89,6 +90,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => 'date',
         'expiresAt' => 'date',
         'redirectUrl' => null,
+        'merchantCustomReference' => null,
         'merchant' => null,
         'self' => null
     ];
@@ -129,6 +131,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => 'createdAt',
         'expiresAt' => 'expiresAt',
         'redirectUrl' => 'redirectUrl',
+        'merchantCustomReference' => 'merchantCustomReference',
         'merchant' => 'merchant',
         'self' => '_self'
     ];
@@ -148,6 +151,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => 'setCreatedAt',
         'expiresAt' => 'setExpiresAt',
         'redirectUrl' => 'setRedirectUrl',
+        'merchantCustomReference' => 'setMerchantCustomReference',
         'merchant' => 'setMerchant',
         'self' => 'setSelf'
     ];
@@ -167,6 +171,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => 'getCreatedAt',
         'expiresAt' => 'getExpiresAt',
         'redirectUrl' => 'getRedirectUrl',
+        'merchantCustomReference' => 'getMerchantCustomReference',
         'merchant' => 'getMerchant',
         'self' => 'getSelf'
     ];
@@ -237,6 +242,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->container['createdAt'] = $data['createdAt'] ?? null;
         $this->container['expiresAt'] = $data['expiresAt'] ?? null;
         $this->container['redirectUrl'] = $data['redirectUrl'] ?? null;
+        $this->container['merchantCustomReference'] = $data['merchantCustomReference'] ?? null;
         $this->container['merchant'] = $data['merchant'] ?? null;
         $this->container['self'] = $data['self'] ?? null;
     }
@@ -504,6 +510,30 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setRedirectUrl($redirectUrl)
     {
         $this->container['redirectUrl'] = $redirectUrl;
+
+        return $this;
+    }
+
+    /**
+     * Gets merchantCustomReference
+     *
+     * @return string|null
+     */
+    public function getMerchantCustomReference()
+    {
+        return $this->container['merchantCustomReference'];
+    }
+
+    /**
+     * Sets merchantCustomReference
+     *
+     * @param string|null $merchantCustomReference merchantCustomReference
+     *
+     * @return self
+     */
+    public function setMerchantCustomReference($merchantCustomReference)
+    {
+        $this->container['merchantCustomReference'] = $merchantCustomReference;
 
         return $this;
     }

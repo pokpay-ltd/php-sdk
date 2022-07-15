@@ -25,6 +25,7 @@ class Demo
             'currencyCode' => 'ALL', // currently, we support only ALL and EUR
             'autoCapture' => true, //if false, $merchantsApi->captureOrder() will be required after client confirmation,
             'redirectUrl' => 'https://www.example.com/some-path', // (optional)
+            'merchantCustomReference' => '5623498', // (optional) e.g.: Invoice Number on your system
             'webhookUrl' => 'https://www.example.com/some-wh-listener', // (optional) will be POST-ed by our server along with order data
         ]);
 
