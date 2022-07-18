@@ -70,7 +70,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirectUrl' => 'string',
         'merchantCustomReference' => 'string',
         'merchant' => '\RPay\POK\PaymentsSdk\Model\Merchant',
-        'self' => '\RPay\POK\PaymentsSdk\Model\SdkOrderSelf'
+        'self' => '\RPay\POK\PaymentsSdk\Model\SdkOrderSelf',
     ];
 
     /**
@@ -92,7 +92,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirectUrl' => null,
         'merchantCustomReference' => null,
         'merchant' => null,
-        'self' => null
+        'self' => null,
     ];
 
     /**
@@ -133,7 +133,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirectUrl' => 'redirectUrl',
         'merchantCustomReference' => 'merchantCustomReference',
         'merchant' => 'merchant',
-        'self' => '_self'
+        'self' => '_self',
     ];
 
     /**
@@ -153,7 +153,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirectUrl' => 'setRedirectUrl',
         'merchantCustomReference' => 'setMerchantCustomReference',
         'merchant' => 'setMerchant',
-        'self' => 'setSelf'
+        'self' => 'setSelf',
     ];
 
     /**
@@ -173,7 +173,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'redirectUrl' => 'getRedirectUrl',
         'merchantCustomReference' => 'getMerchantCustomReference',
         'merchant' => 'getMerchant',
-        'self' => 'getSelf'
+        'self' => 'getSelf',
     ];
 
     /**
