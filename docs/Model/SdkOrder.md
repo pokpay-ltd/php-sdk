@@ -16,6 +16,5 @@
 | **merchantCustomReference** | **string**                                                                |             | [optional]         |
 | **merchant**                | [**\RPay\POK\PaymentsSdk\Model\Merchant**](Merchant.md)                   |             | [optional]         |
 | **self**                    | [**\RPay\POK\PaymentsSdk\Model\SdkOrderSelf**](SdkOrderSelf.md)           |             | [optional]         |
-| **splitWith**               | [**\RPay\POK\PaymentsSdk\Model\SdkOrderSplitWith**](SdkOrderSplitWith.md) |             | [optional]         |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

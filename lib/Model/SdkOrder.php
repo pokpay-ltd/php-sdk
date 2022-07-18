@@ -71,7 +71,6 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'merchantCustomReference' => 'string',
         'merchant' => '\RPay\POK\PaymentsSdk\Model\Merchant',
         'self' => '\RPay\POK\PaymentsSdk\Model\SdkOrderSelf',
-        'splitWith' => '\RPay\POK\PaymentsSdk\Model\SdkOrderSplitWith',
     ];
 
     /**
@@ -94,7 +93,6 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'merchantCustomReference' => null,
         'merchant' => null,
         'self' => null,
-        'splitWith' => null,
     ];
 
     /**
@@ -136,7 +134,6 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'merchantCustomReference' => 'merchantCustomReference',
         'merchant' => 'merchant',
         'self' => '_self',
-        'splitWith' => 'splitWith'
     ];
 
     /**
@@ -157,7 +154,6 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'merchantCustomReference' => 'setMerchantCustomReference',
         'merchant' => 'setMerchant',
         'self' => 'setSelf',
-        'splitWith' => 'setSplitWith',
     ];
 
     /**
@@ -178,7 +174,6 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'merchantCustomReference' => 'getMerchantCustomReference',
         'merchant' => 'getMerchant',
         'self' => 'getSelf',
-        'splitWith' => 'getSplitWith'
     ];
 
     /**
@@ -250,7 +245,6 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->container['merchantCustomReference'] = $data['merchantCustomReference'] ?? null;
         $this->container['merchant'] = $data['merchant'] ?? null;
         $this->container['self'] = $data['self'] ?? null;
-        $this->container['splitWith'] = $data['splitWith'] ?? null;
     }
 
     /**
@@ -588,29 +582,6 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setSelf($self)
     {
         $this->container['self'] = $self;
-
-        return $this;
-    }
-    /**
-     * Gets splitWith
-     *
-     * @return \RPay\POK\PaymentsSdk\Model\SdkOrderSplitWith|null
-     */
-    public function getSplitWith()
-    {
-        return $this->container['splitWith'];
-    }
-
-    /**
-     * Sets splitWith
-     *
-     * @param \RPay\POK\PaymentsSdk\Model\SdkOrderSplitWith|null $splitWith splitWith
-     *
-     * @return self
-     */
-    public function setSplitWith($splitWith)
-    {
-        $this->container['splitWith'] = $splitWith;
 
         return $this;
     }
