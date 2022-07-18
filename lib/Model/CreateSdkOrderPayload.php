@@ -67,7 +67,8 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'webhookUrl' => 'string',
         'redirectUrl' => 'string',
         'merchantCustomReference' => 'string',
-        'deeplink' => 'string'
+        'deeplink' => 'string',
+        'splitWith' => '\RPay\POK\PaymentsSdk\Model\SdkOrderSplitWith',
     ];
 
     /**
@@ -86,7 +87,8 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'webhookUrl' => null,
         'redirectUrl' => null,
         'merchantCustomReference' => null,
-        'deeplink' => null
+        'deeplink' => null,
+        'splitWith' => null,
     ];
 
     /**
@@ -124,7 +126,8 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'webhookUrl' => 'webhookUrl',
         'redirectUrl' => 'redirectUrl',
         'merchantCustomReference' => 'merchantCustomReference',
-        'deeplink' => 'deeplink'
+        'deeplink' => 'deeplink',
+        'splitWith' => 'splitWith'
     ];
 
     /**
@@ -141,7 +144,8 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'webhookUrl' => 'setWebhookUrl',
         'redirectUrl' => 'setRedirectUrl',
         'merchantCustomReference' => 'setMerchantCustomReference',
-        'deeplink' => 'setDeeplink'
+        'deeplink' => 'setDeeplink',
+        'splitWith' => 'setSplitWith',
     ];
 
     /**
@@ -158,7 +162,8 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'webhookUrl' => 'getWebhookUrl',
         'redirectUrl' => 'getRedirectUrl',
         'merchantCustomReference' => 'getMerchantCustomReference',
-        'deeplink' => 'getDeeplink'
+        'deeplink' => 'getDeeplink',
+        'splitWith' => 'getSplitWith'
     ];
 
     /**
@@ -227,6 +232,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->container['redirectUrl'] = $data['redirectUrl'] ?? null;
         $this->container['merchantCustomReference'] = $data['merchantCustomReference'] ?? null;
         $this->container['deeplink'] = $data['deeplink'] ?? null;
+        $this->container['splitWith'] = $data['splitWith'] ?? null;
     }
 
     /**
@@ -484,6 +490,29 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setDeeplink($deeplink)
     {
         $this->container['deeplink'] = $deeplink;
+
+        return $this;
+    }
+    /**
+     * Gets splitWith
+     *
+     * @return \RPay\POK\PaymentsSdk\Model\SdkOrderSplitWith|null
+     */
+    public function getSplitWith()
+    {
+        return $this->container['splitWith'];
+    }
+
+    /**
+     * Sets splitWith
+     *
+     * @param \RPay\POK\PaymentsSdk\Model\SdkOrderSplitWith|null $splitWith splitWith
+     *
+     * @return self
+     */
+    public function setSplitWith($splitWith)
+    {
+        $this->container['splitWith'] = $splitWith;
 
         return $this;
     }

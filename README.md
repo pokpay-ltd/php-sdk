@@ -85,6 +85,7 @@ All URIs are relative to *https://api.pokpay.io* in the production environment a
 - [SdkOrderResponse](docs/Model/SdkOrderResponse.md)
 - [SdkOrderResponseData](docs/Model/SdkOrderResponseData.md)
 - [SdkOrderSelf](docs/Model/SdkOrderSelf.md)
+- [SdkOrderSplitWith](docs/Model/SdkOrderSplitWith.md)
 
 ## Authorization
 
