@@ -69,6 +69,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'merchantCustomReference' => 'string',
         'deeplink' => 'string',
         'splitWith' => '\RPay\POK\PaymentsSdk\Model\SdkOrderSplitWith',
+        'description' => 'string',
     ];
 
     /**
@@ -89,6 +90,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'merchantCustomReference' => null,
         'deeplink' => null,
         'splitWith' => null,
+        'description' => null,
     ];
 
     /**
@@ -127,7 +129,8 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'redirectUrl' => 'redirectUrl',
         'merchantCustomReference' => 'merchantCustomReference',
         'deeplink' => 'deeplink',
-        'splitWith' => 'splitWith'
+        'splitWith' => 'splitWith',
+        'description' => 'description',
     ];
 
     /**
@@ -146,6 +149,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'merchantCustomReference' => 'setMerchantCustomReference',
         'deeplink' => 'setDeeplink',
         'splitWith' => 'setSplitWith',
+        'description' => 'setDescription'
     ];
 
     /**
@@ -163,7 +167,8 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'redirectUrl' => 'getRedirectUrl',
         'merchantCustomReference' => 'getMerchantCustomReference',
         'deeplink' => 'getDeeplink',
-        'splitWith' => 'getSplitWith'
+        'splitWith' => 'getSplitWith',
+        'description' => 'getDescription',
     ];
 
     /**
@@ -233,6 +238,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->container['merchantCustomReference'] = $data['merchantCustomReference'] ?? null;
         $this->container['deeplink'] = $data['deeplink'] ?? null;
         $this->container['splitWith'] = $data['splitWith'] ?? null;
+        $this->container['description'] = $data['description'] ?? null;
     }
 
     /**
@@ -417,6 +423,30 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setWebhookUrl($webhookUrl)
     {
         $this->container['webhookUrl'] = $webhookUrl;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description description
+     *
+     * @return self
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
 
         return $this;
     }
