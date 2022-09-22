@@ -25,13 +25,7 @@
   "require": {
     "php": "^7.3 || ^8.0",
     "ext-curl": "*",
-    "ext-json": "*",
-    "ext-mbstring": "*",
-    "guzzlehttp/guzzle": "6.5.8"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "^8.0 || ^9.0",
-    "friendsofphp/php-cs-fixer": "^2.12"
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": { "RPay\\POK\\PaymentsSdk\\" : "lib/" }
