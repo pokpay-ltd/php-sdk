@@ -6,6 +6,7 @@
 |-----------------------------|---------------------------------------------------------------------------|-------------|--------------------|
 | **id**                      | **string**                                                                |             |                    |
 | **amount**                  | **float**                                                                 |             |                    |
+| **capturedAmount**          | **capturedAmount**                                                        |             |                    |
 | **currencyCode**            | **string**                                                                |             | [default to 'ALL'] |
 | **products**                | [**\RPay\POK\PaymentsSdk\Model\SdkOrderProduct[]**](SdkOrderProduct.md)   |             | [optional]         |
 | **shippingCost**            | **float**                                                                 |             | [optional]         |

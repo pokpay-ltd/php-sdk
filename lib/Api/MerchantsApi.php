@@ -129,14 +129,15 @@ class MerchantsApi
      * Capture an sdk order
      *
      * @param  string $sdkOrderId sdkOrderId (required)
+     * @param  float $amount amount (required)
      *
      * @throws \RPay\POK\PaymentsSdk\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \RPay\POK\PaymentsSdk\Model\SdkOrderResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse
      */
-    public function captureOrder($sdkOrderId)
+    public function captureOrder($sdkOrderId, $amount)
     {
-        list($response) = $this->captureOrderWithHttpInfo($this->merchantId, $sdkOrderId);
+        list($response) = $this->captureOrderWithHttpInfo($this->merchantId, $sdkOrderId, $amount);
         return $response;
     }
 
@@ -147,14 +148,15 @@ class MerchantsApi
      *
      * @param  string $merchantId (required)
      * @param  string $sdkOrderId (required)
+     * @param  float $amount (required)
      *
      * @throws \RPay\POK\PaymentsSdk\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \RPay\POK\PaymentsSdk\Model\SdkOrderResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse|\RPay\POK\PaymentsSdk\Model\ErrorResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function captureOrderWithHttpInfo($merchantId, $sdkOrderId)
+    public function captureOrderWithHttpInfo($merchantId, $sdkOrderId, $amount)
     {
-        $request = $this->captureOrderRequest($merchantId, $sdkOrderId);
+        $request = $this->captureOrderRequest($merchantId, $sdkOrderId, $amount);
 
         try {
             $options = $this->createHttpClientOption();
@@ -362,11 +364,12 @@ class MerchantsApi
      *
      * @param  string $merchantId (required)
      * @param  string $sdkOrderId (required)
+     * @param  float $amount     (required)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function captureOrderRequest($merchantId, $sdkOrderId)
+    public function captureOrderRequest($merchantId, $sdkOrderId, $amount)
     {
         // verify the required parameter 'merchantId' is set
         if ($merchantId === null || (is_array($merchantId) && count($merchantId) === 0)) {
@@ -381,6 +384,13 @@ class MerchantsApi
             );
         }
 
+        // verify the required parameter 'amount' is set
+        if ($amount === null || (is_array($amount) && count($amount) === 0)) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $amount when calling captureOrder'
+            );
+        }
+
         $resourcePath = '/merchants/{merchantId}/sdk-orders/{sdkOrderId}/capture';
         $formParams = [];
         $queryParams = [];
@@ -388,7 +398,11 @@ class MerchantsApi
         $httpBody = '';
         $multipart = false;
 
+        $body = [
+            "amount" => $amount
+        ];
 
+        $httpBody = \GuzzleHttp\json_encode($body);
 
         // path params
         if ($merchantId !== null) {
@@ -406,7 +420,6 @@ class MerchantsApi
                 $resourcePath
             );
         }
-
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(

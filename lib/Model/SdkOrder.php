@@ -61,6 +61,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'id' => 'string',
         'amount' => 'float',
+        'capturedAmount' => 'float',
         'currencyCode' => 'string',
         'products' => '\RPay\POK\PaymentsSdk\Model\SdkOrderProduct[]',
         'shippingCost' => 'float',
@@ -83,6 +84,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'id' => null,
         'amount' => null,
+        'capturedAmount' => null,
         'currencyCode' => null,
         'products' => null,
         'shippingCost' => null,
@@ -124,6 +126,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'id' => 'id',
         'amount' => 'amount',
+        'capturedAmount' => 'capturedAmount',
         'currencyCode' => 'currencyCode',
         'products' => 'products',
         'shippingCost' => 'shippingCost',
@@ -144,6 +147,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'id' => 'setId',
         'amount' => 'setAmount',
+        'capturedAmount' => 'setCapturedAmount',
         'currencyCode' => 'setCurrencyCode',
         'products' => 'setProducts',
         'shippingCost' => 'setShippingCost',
@@ -164,6 +168,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'id' => 'getId',
         'amount' => 'getAmount',
+        'capturedAmount' => 'getCapturedAmount',
         'currencyCode' => 'getCurrencyCode',
         'products' => 'getProducts',
         'shippingCost' => 'getShippingCost',
@@ -235,6 +240,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->container['id'] = $data['id'] ?? null;
         $this->container['amount'] = $data['amount'] ?? null;
+        $this->container['capturedAmount'] = $data['capturedAmount'] ?? null;
         $this->container['currencyCode'] = $data['currencyCode'] ?? 'ALL';
         $this->container['products'] = $data['products'] ?? null;
         $this->container['shippingCost'] = $data['shippingCost'] ?? null;
@@ -262,13 +268,15 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['amount'] === null) {
             $invalidProperties[] = "'amount' can't be null";
         }
+        if ($this->container['capturedAmount'] === null) {
+            $invalidProperties[] = "'capturedAmount' can't be null";
+        }
         if ($this->container['currencyCode'] === null) {
             $invalidProperties[] = "'currencyCode' can't be null";
         }
         if (!is_null($this->container['shippingCost']) && ($this->container['shippingCost'] < 0)) {
             $invalidProperties[] = "invalid value for 'shippingCost', must be bigger than or equal to 0.";
         }
-
         if ($this->container['finalAmount'] === null) {
             $invalidProperties[] = "'finalAmount' can't be null";
         }
@@ -340,6 +348,31 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
 
         return $this;
     }
+
+    /**
+     * Gets capturedAmount
+     *
+     * @return float
+     */
+    public function getCapturedAmount()
+    {
+        return $this->container['capturedAmount'];
+    }
+
+    /**
+     * Sets capturedAmount
+     *
+     * @param float $capturedAmount capturedAmount
+     *
+     * @return self
+     */
+    public function setCapturedAmount($capturedAmount)
+    {
+        $this->container['capturedAmount'] = $capturedAmount;
+
+        return $this;
+    }
+
 
     /**
      * Gets currencyCode

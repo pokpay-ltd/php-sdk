@@ -33,9 +33,10 @@ $apiInstance = new RPay\POK\PaymentsSdk\Api\MerchantsApi(
 );
 
 $sdkOrderId = 'sdkOrderId_example'; // string
+$amount = 100 // amount of sdk order payment to capture
 
 try {
-    $result = $apiInstance->captureOrder($sdkOrderId);
+    $result = $apiInstance->captureOrder($sdkOrderId, $amount);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling MerchantsApi->captureOrder: ', $e->getMessage(), PHP_EOL;
