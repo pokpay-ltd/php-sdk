@@ -6,6 +6,7 @@
 |-----------------------------|---------------------------------------------------------------------------|-------------|--------------------|
 | **id**                      | **string**                                                                |             |                    |
 | **amount**                  | **float**                                                                 |             |                    |
+| **capturedAmount**          | **capturedAmount**                                                        |             |                    |
 | **currencyCode**            | **string**                                                                |             | [default to 'ALL'] |
 | **products**                | [**\RPay\POK\PaymentsSdk\Model\SdkOrderProduct[]**](SdkOrderProduct.md)   |             | [optional]         |
 | **shippingCost**            | **float**                                                                 |             | [optional]         |
@@ -13,6 +14,7 @@
 | **createdAt**               | [**\DateTime**](\DateTime.md)                                             |             |                    |
 | **expiresAt**               | [**\DateTime**](\DateTime.md)                                             |             |                    |
 | **redirectUrl**             | **string**                                                                |             | [optional]         |
+| **failRedirectUrl**         | **string**                                                                |             | [optional]         |
 | **merchantCustomReference** | **string**                                                                |             | [optional]         |
 | **merchant**                | [**\RPay\POK\PaymentsSdk\Model\Merchant**](Merchant.md)                   |             | [optional]         |
 | **self**                    | [**\RPay\POK\PaymentsSdk\Model\SdkOrderSelf**](SdkOrderSelf.md)           |             | [optional]         |

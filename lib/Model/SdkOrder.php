@@ -61,6 +61,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPITypes = [
         'id' => 'string',
         'amount' => 'float',
+        'capturedAmount' => 'float',
         'currencyCode' => 'string',
         'products' => '\RPay\POK\PaymentsSdk\Model\SdkOrderProduct[]',
         'shippingCost' => 'float',
@@ -68,6 +69,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => '\DateTime',
         'expiresAt' => '\DateTime',
         'redirectUrl' => 'string',
+        'failRedirectUrl' => 'string',
         'merchantCustomReference' => 'string',
         'merchant' => '\RPay\POK\PaymentsSdk\Model\Merchant',
         'self' => '\RPay\POK\PaymentsSdk\Model\SdkOrderSelf',
@@ -83,6 +85,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $openAPIFormats = [
         'id' => null,
         'amount' => null,
+        'capturedAmount' => null,
         'currencyCode' => null,
         'products' => null,
         'shippingCost' => null,
@@ -90,6 +93,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => 'date',
         'expiresAt' => 'date',
         'redirectUrl' => null,
+        'failRedirectUrl' => null,
         'merchantCustomReference' => null,
         'merchant' => null,
         'self' => null,
@@ -124,6 +128,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $attributeMap = [
         'id' => 'id',
         'amount' => 'amount',
+        'capturedAmount' => 'capturedAmount',
         'currencyCode' => 'currencyCode',
         'products' => 'products',
         'shippingCost' => 'shippingCost',
@@ -131,6 +136,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => 'createdAt',
         'expiresAt' => 'expiresAt',
         'redirectUrl' => 'redirectUrl',
+        'failRedirectUrl' => 'failRedirectUrl',
         'merchantCustomReference' => 'merchantCustomReference',
         'merchant' => 'merchant',
         'self' => '_self',
@@ -144,6 +150,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $setters = [
         'id' => 'setId',
         'amount' => 'setAmount',
+        'capturedAmount' => 'setCapturedAmount',
         'currencyCode' => 'setCurrencyCode',
         'products' => 'setProducts',
         'shippingCost' => 'setShippingCost',
@@ -151,6 +158,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => 'setCreatedAt',
         'expiresAt' => 'setExpiresAt',
         'redirectUrl' => 'setRedirectUrl',
+        'failRedirectUrl' => 'setFailRedirectUrl',
         'merchantCustomReference' => 'setMerchantCustomReference',
         'merchant' => 'setMerchant',
         'self' => 'setSelf',
@@ -164,6 +172,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     protected static $getters = [
         'id' => 'getId',
         'amount' => 'getAmount',
+        'capturedAmount' => 'getCapturedAmount',
         'currencyCode' => 'getCurrencyCode',
         'products' => 'getProducts',
         'shippingCost' => 'getShippingCost',
@@ -171,6 +180,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         'createdAt' => 'getCreatedAt',
         'expiresAt' => 'getExpiresAt',
         'redirectUrl' => 'getRedirectUrl',
+        'failRedirectUrl' => 'getFailRedirectUrl',
         'merchantCustomReference' => 'getMerchantCustomReference',
         'merchant' => 'getMerchant',
         'self' => 'getSelf',
@@ -235,6 +245,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $this->container['id'] = $data['id'] ?? null;
         $this->container['amount'] = $data['amount'] ?? null;
+        $this->container['capturedAmount'] = $data['capturedAmount'] ?? null;
         $this->container['currencyCode'] = $data['currencyCode'] ?? 'ALL';
         $this->container['products'] = $data['products'] ?? null;
         $this->container['shippingCost'] = $data['shippingCost'] ?? null;
@@ -242,6 +253,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->container['createdAt'] = $data['createdAt'] ?? null;
         $this->container['expiresAt'] = $data['expiresAt'] ?? null;
         $this->container['redirectUrl'] = $data['redirectUrl'] ?? null;
+        $this->container['failRedirectUrl'] = $data['failRedirectUrl'] ?? null;
         $this->container['merchantCustomReference'] = $data['merchantCustomReference'] ?? null;
         $this->container['merchant'] = $data['merchant'] ?? null;
         $this->container['self'] = $data['self'] ?? null;
@@ -262,13 +274,15 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['amount'] === null) {
             $invalidProperties[] = "'amount' can't be null";
         }
+        if ($this->container['capturedAmount'] === null) {
+            $invalidProperties[] = "'capturedAmount' can't be null";
+        }
         if ($this->container['currencyCode'] === null) {
             $invalidProperties[] = "'currencyCode' can't be null";
         }
         if (!is_null($this->container['shippingCost']) && ($this->container['shippingCost'] < 0)) {
             $invalidProperties[] = "invalid value for 'shippingCost', must be bigger than or equal to 0.";
         }
-
         if ($this->container['finalAmount'] === null) {
             $invalidProperties[] = "'finalAmount' can't be null";
         }
@@ -340,6 +354,31 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
 
         return $this;
     }
+
+    /**
+     * Gets capturedAmount
+     *
+     * @return float
+     */
+    public function getCapturedAmount()
+    {
+        return $this->container['capturedAmount'];
+    }
+
+    /**
+     * Sets capturedAmount
+     *
+     * @param float $capturedAmount capturedAmount
+     *
+     * @return self
+     */
+    public function setCapturedAmount($capturedAmount)
+    {
+        $this->container['capturedAmount'] = $capturedAmount;
+
+        return $this;
+    }
+
 
     /**
      * Gets currencyCode
@@ -510,6 +549,30 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
     public function setRedirectUrl($redirectUrl)
     {
         $this->container['redirectUrl'] = $redirectUrl;
+
+        return $this;
+    }
+
+    /**
+     * Gets failRedirectUrl
+     *
+     * @return string|null
+     */
+    public function getFailRedirectUrl()
+    {
+        return $this->container['failRedirectUrl'];
+    }
+
+    /**
+     * Sets failRedirectUrl
+     *
+     * @param string|null $failRedirectUrl failRedirectUrl
+     *
+     * @return self
+     */
+    public function setRedirectUrl($failRedirectUrl)
+    {
+        $this->container['failRedirectUrl'] = $failRedirectUrl;
 
         return $this;
     }
