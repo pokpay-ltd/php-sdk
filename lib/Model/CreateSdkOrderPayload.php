@@ -66,6 +66,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'shippingCost' => 'float',
         'webhookUrl' => 'string',
         'redirectUrl' => 'string',
+        'failRedirectUrl' => 'string',
         'merchantCustomReference' => 'string',
         'deeplink' => 'string',
         'splitWith' => '\RPay\POK\PaymentsSdk\Model\SdkOrderSplitWith',
@@ -87,6 +88,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'shippingCost' => null,
         'webhookUrl' => null,
         'redirectUrl' => null,
+        'failRedirectUrl' => null,
         'merchantCustomReference' => null,
         'deeplink' => null,
         'splitWith' => null,
@@ -127,6 +129,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'shippingCost' => 'shippingCost',
         'webhookUrl' => 'webhookUrl',
         'redirectUrl' => 'redirectUrl',
+        'failRedirectUrl' => 'failRedirectUrl',
         'merchantCustomReference' => 'merchantCustomReference',
         'deeplink' => 'deeplink',
         'splitWith' => 'splitWith',
@@ -146,6 +149,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'shippingCost' => 'setShippingCost',
         'webhookUrl' => 'setWebhookUrl',
         'redirectUrl' => 'setRedirectUrl',
+        'failRedirectUrl' => 'setFailRedirectUrl',
         'merchantCustomReference' => 'setMerchantCustomReference',
         'deeplink' => 'setDeeplink',
         'splitWith' => 'setSplitWith',
@@ -165,6 +169,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'shippingCost' => 'getShippingCost',
         'webhookUrl' => 'getWebhookUrl',
         'redirectUrl' => 'getRedirectUrl',
+        'failRedirectUrl' => 'getFailRedirectUrl',
         'merchantCustomReference' => 'getMerchantCustomReference',
         'deeplink' => 'getDeeplink',
         'splitWith' => 'getSplitWith',
@@ -235,6 +240,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->container['shippingCost'] = $data['shippingCost'] ?? null;
         $this->container['webhookUrl'] = $data['webhookUrl'] ?? null;
         $this->container['redirectUrl'] = $data['redirectUrl'] ?? null;
+        $this->container['failRedirectUrl'] = $data['failRedirectUrl'] ?? null;
         $this->container['merchantCustomReference'] = $data['merchantCustomReference'] ?? null;
         $this->container['deeplink'] = $data['deeplink'] ?? null;
         $this->container['splitWith'] = $data['splitWith'] ?? null;
@@ -471,6 +477,30 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function setRedirectUrl($redirectUrl)
     {
         $this->container['redirectUrl'] = $redirectUrl;
+
+        return $this;
+    }
+
+    /**
+     * Gets failRedirectUrl
+     *
+     * @return string|null
+     */
+    public function getFailRedirectUrl()
+    {
+        return $this->container['failRedirectUrl'];
+    }
+
+    /**
+     * Sets redirectUrl
+     *
+     * @param string|null $failRedirectUrl failRedirectUrl
+     *
+     * @return self
+     */
+    public function setFailRedirectUrl($failRedirectUrl)
+    {
+        $this->container['failRedirectUrl'] = $failRedirectUrl;
 
         return $this;
     }
