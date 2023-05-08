@@ -570,7 +570,7 @@ class SdkOrder implements ModelInterface, ArrayAccess, \JsonSerializable
      *
      * @return self
      */
-    public function setRedirectUrl($failRedirectUrl)
+    public function setFailRedirectUrl($failRedirectUrl)
     {
         $this->container['failRedirectUrl'] = $failRedirectUrl;
 
