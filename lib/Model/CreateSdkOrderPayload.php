@@ -71,6 +71,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'deeplink' => 'string',
         'splitWith' => '\RPay\POK\PaymentsSdk\Model\SdkOrderSplitWith',
         'description' => 'string',
+        'expiresAfterMinutes' => 'int',
     ];
 
     /**
@@ -93,6 +94,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'deeplink' => null,
         'splitWith' => null,
         'description' => null,
+        'expiresAfterMinutes' => null,
     ];
 
     /**
@@ -134,6 +136,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'deeplink' => 'deeplink',
         'splitWith' => 'splitWith',
         'description' => 'description',
+        'expiresAfterMinutes' => 'expiresAfterMinutes',
     ];
 
     /**
@@ -153,7 +156,8 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'merchantCustomReference' => 'setMerchantCustomReference',
         'deeplink' => 'setDeeplink',
         'splitWith' => 'setSplitWith',
-        'description' => 'setDescription'
+        'description' => 'setDescription',
+        'expiresAfterMinutes' => 'setExpiresAfterMinutes',
     ];
 
     /**
@@ -174,6 +178,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         'deeplink' => 'getDeeplink',
         'splitWith' => 'getSplitWith',
         'description' => 'getDescription',
+        'expiresAfterMinutes' => 'getExpiresAfterMinutes',
     ];
 
     /**
@@ -245,6 +250,7 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
         $this->container['deeplink'] = $data['deeplink'] ?? null;
         $this->container['splitWith'] = $data['splitWith'] ?? null;
         $this->container['description'] = $data['description'] ?? null;
+        $this->container['expiresAfterMinutes'] = $data['expiresAfterMinutes'] ?? null;
     }
 
     /**
@@ -281,6 +287,30 @@ class CreateSdkOrderPayload implements ModelInterface, ArrayAccess, \JsonSeriali
     public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
+    }
+
+    /**
+     * Gets expiresAfterMinutes
+     *
+     * @return string
+     */
+    public function getExpiresAfterMinutes()
+    {
+        return $this->container['expiresAfterMinutes'];
+    }
+
+    /**
+     * Sets expiresAfterMinutes
+     *
+     * @param string $expiresAfterMinutes expiresAfterMinutes
+     *
+     * @return self
+     */
+    public function setExpiresAfterMinutes($expiresAfterMinutes)
+    {
+        $this->container['expiresAfterMinutes'] = $expiresAfterMinutes;
+
+        return $this;
     }
 
 
