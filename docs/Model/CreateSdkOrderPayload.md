@@ -16,6 +16,7 @@
 | **deeplink**                | **string**                                                                |             | [optional]         |
 | **splitWith**               | [**\RPay\POK\PaymentsSdk\Model\SdkOrderSplitWith**](SdkOrderSplitWith.md) |             | [optional]         |
 | **description**             | **string**                                                                |             | [optional]         |
+| **expiresAfterMinutes**     | **int**                                                                   |             | [optional]         |
 
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)
